@@ -1,8 +1,10 @@
-﻿namespace CS4125Project.Models
+﻿using System.Collections.Generic;
+
+namespace CS4125Project.Models
 {
+
     public class PayrollModel 
     {
         List<EmployeeModel> employees;
-
     }
 }
