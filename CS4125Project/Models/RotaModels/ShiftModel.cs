@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CS4125Project.Models
+namespace CS4125Project.Models.RotaModels
 {
     public enum Day
     {

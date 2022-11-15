@@ -1,4 +1,4 @@
-﻿namespace CS4125Project.Models
+﻿namespace CS4125Project.Models.EmployeeModels
 {
     public class HolidayRequestModel
     {

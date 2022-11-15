@@ -8,19 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\shane\\.nuget\\packages\\": {}
+    "C:\\Users\\pgnma\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\dev\\UNI\\CS4125Project\\CS4125Project\\CS4125Project\\CS4125Project.csproj",
+      "projectUniqueName": "C:\\Users\\pgnma\\Source\\Repos\\Slattz\\CS4125Project\\CS4125Project\\CS4125Project.csproj",
       "projectName": "CS4125Project",
-      "projectPath": "C:\\dev\\UNI\\CS4125Project\\CS4125Project\\CS4125Project\\CS4125Project.csproj",
-      "packagesPath": "C:\\Users\\shane\\.nuget\\packages\\",
-      "outputPath": "C:\\dev\\UNI\\CS4125Project\\CS4125Project\\CS4125Project\\obj\\",
+      "projectPath": "C:\\Users\\pgnma\\Source\\Repos\\Slattz\\CS4125Project\\CS4125Project\\CS4125Project.csproj",
+      "packagesPath": "C:\\Users\\pgnma\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\pgnma\\Source\\Repos\\Slattz\\CS4125Project\\CS4125Project\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\shane\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\pgnma\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -56,24 +56,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[3.1.10, 3.1.10]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[3.1.30, 3.1.30]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[3.1.0, 3.1.0]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[3.1.0, 3.1.0]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -82,7 +64,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,4 +1,6 @@
 ﻿using CS4125Project.Models;
+using CS4125Project.Models.EmployeeModels;
+using CS4125Project.Models.RotaModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,7 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CS4125Project.Controllers
+namespace CS4125Project.Controllers.RotaControllers
 {
     public class RotaController : Controller
     {
@@ -35,13 +37,13 @@ namespace CS4125Project.Controllers
         }
 
         [HttpPost]
-        public Boolean AssignShift(EmployeeModel emp, int shiftID)
+        public bool AssignShift(EmployeeModel emp, int shiftID)
         {
 
         }
 
         [HttpPost]
-        public DateTime AddShift(String role, Day workday, DateTime startTime, DateTime endTime)
+        public DateTime AddShift(string role, Day workday, DateTime startTime, DateTime endTime)
         {
 
         }
