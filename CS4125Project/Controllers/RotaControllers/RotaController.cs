@@ -14,10 +14,12 @@ namespace CS4125Project.Controllers.RotaControllers
     public class RotaController : Controller
     {
         private readonly ILogger<RotaController> _logger;
+        private RotaModel rota;
 
-        public RotaController(ILogger<RotaController> logger)
+        public RotaController(ILogger<RotaController> logger, RotaModel r)
         {
             _logger = logger;
+            rota = r;
         }
 
         public IActionResult Index()
@@ -39,7 +41,15 @@ namespace CS4125Project.Controllers.RotaControllers
         [HttpPost]
         public bool AssignShift(EmployeeModel emp, int shiftID)
         {
-
+            foreach (ShiftModel s in rota.shifts)
+            {
+                if (shiftID == s.id)
+                {
+                    s.employeeID = emp.id;
+                    return true;
+                }
+            }
+            return false;
         }
 
         [HttpPost]

@@ -19,5 +19,7 @@ namespace CS4125Project.Models.RotaModels
         public Day workday;
         public DateTime startTime;
         public DateTime endTime;
+        public int id;
+        public int employeeID;
     }
 }
