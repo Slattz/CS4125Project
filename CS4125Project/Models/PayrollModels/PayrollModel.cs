@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
-using CS4125Project.Models.EmployeeModels;
+using CS4125Project.Controllers.EmployeeServices;
 
 namespace CS4125Project.Models.PayrollModels
 {
 
     public class PayrollModel
     {
-        List<EmployeeModel> employees;
+        public List<EmployeeController> employees;
+        public IPayCalcVisitor calc;
+        public List<PayslipModel> payslips;
     }
 }
