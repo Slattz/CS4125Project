@@ -12,5 +12,11 @@
         public float sickDays;
         public float holidays;
         public AuthLevel level;
+        public string notification;
+
+        public override string ToString()
+        {
+            return name + " " + id + " " + email + " " + role + " " + sickDays + " " + holidays + " " + level + " " + notification;
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using CS4125Project.Models;
 using CS4125Project.Models.EmployeeModels;
 using CS4125Project.Models.RotaModels;
+using CS4125Project.Observer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,10 +12,11 @@ using System.Threading.Tasks;
 
 namespace CS4125Project.Controllers.RotaControllers
 {
-    public class RotaController : Controller
+    public class RotaController : Controller, ISubject
     {
         private readonly ILogger<RotaController> _logger;
         private RotaModel rota;
+        private List<IObserver> _observers = new List<IObserver>();
 
         public RotaController(ILogger<RotaController> logger, RotaModel r)
         {
@@ -52,11 +54,11 @@ namespace CS4125Project.Controllers.RotaControllers
             return false;
         }
 
-        [HttpPost]
+        /*[HttpPost]
         public DateTime AddShift(string role, Day workday, DateTime startTime, DateTime endTime)
         {
-
-        }
+            
+        }*/
 
         [HttpPost]
         public void RemoveShift(int shiftID)
@@ -71,9 +73,38 @@ namespace CS4125Project.Controllers.RotaControllers
         }
 
         [HttpPost]
-        public <ShiftModel> GetRota()
+        /*public <ShiftModel> GetRota()
         {
 
+        }*/
+
+        public void Attach(IObserver observer)
+        {
+            Console.WriteLine("Subject: Attached an observer.");
+            this._observers.Add(observer);
+        }
+
+        public void Detach(IObserver observer)
+        {
+            this._observers.Remove(observer);
+            Console.WriteLine("Subject: Detached an observer.");
+        }
+
+        public void Notify()
+        {
+            Console.WriteLine("Subject: Notifying observers...");
+
+            foreach (var observer in _observers)
+            {
+                observer.Update(this);
+            }
+        }
+
+        public void UpdateCurrentRota()
+        {
+            Console.WriteLine("\nSubject: I'm updating the current rota");
+
+            this.Notify();
         }
     }
 }
