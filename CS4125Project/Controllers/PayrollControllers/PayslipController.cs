@@ -25,7 +25,7 @@ namespace CS4125Project.Controllers.PayrollControllers
             foreach(var employee in payroll.employees)
             {
                 var payslip = new PayslipModel();
-                payslip.pay = employee.acceptCalc(payroll.calc);
+                payslip.pay = employee.AcceptCalc(payroll.calc);
                 payroll.payslips.Add(payslip);
             }
         }
