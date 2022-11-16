@@ -1,9 +1,9 @@
 ﻿
-using CS4125Project.Controllers.EmployeeServices;
+using CS4125Project.Controllers.EmployeeControllers;
 
 public class IrishPayCalcVisitor : IPayCalcVisitor
 {
-    public float visitEmployee(EmployeeController employee)
+    public float visitEmployee(EmployeeControllerBase employee)
     {
         //Super complicated ultra powerful calculator
         return 100;

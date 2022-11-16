@@ -20,7 +20,7 @@ namespace CS4125Project.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View("~/Views/UserViews/Home/Index.cshtml");
         }
 
         public IActionResult Privacy()
