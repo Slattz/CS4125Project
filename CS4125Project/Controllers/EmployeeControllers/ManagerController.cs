@@ -13,5 +13,10 @@ namespace CS4125Project.Controllers.EmployeeServices
         {
             return View();
         }
+
+        public override float AcceptCalc(IPayCalcVisitor visitor)
+        {
+            return visitor.VisitManager(this);
+        }
     }
 }

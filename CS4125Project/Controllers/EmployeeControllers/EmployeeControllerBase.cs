@@ -1,5 +1,4 @@
-﻿using CS4125Project.Models.EmployeeModels;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace CS4125Project.Controllers.EmployeeControllers
 {
@@ -13,7 +12,7 @@ namespace CS4125Project.Controllers.EmployeeControllers
 
         public virtual float AcceptCalc(IPayCalcVisitor visitor)
         {
-            return visitor.visitEmployee(this);
+            return visitor.VisitEmployee(this);
         }
     }
 }

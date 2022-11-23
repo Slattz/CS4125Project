@@ -1,5 +1,4 @@
-﻿using CS4125Project.Controllers.EmployeeServices;
-using CS4125Project.Models.PayrollModels;
+﻿using CS4125Project.Models.PayrollModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -19,10 +18,10 @@ namespace CS4125Project.Controllers.PayrollControllers
             return View();
         }
 
-        public void generatePayslip()
+        public void GeneratePayslip()
         {
             payroll.payslips = new List<PayslipModel>();
-            foreach(var employee in payroll.employees)
+            foreach (var employee in payroll.employees)
             {
                 var payslip = new PayslipModel();
                 payslip.pay = employee.AcceptCalc(payroll.calc);

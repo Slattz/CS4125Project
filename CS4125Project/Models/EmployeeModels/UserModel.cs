@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CS4125Project.Models.EmployeeModels
+﻿namespace CS4125Project.Models.EmployeeModels
 {
     public class UserModel
     {

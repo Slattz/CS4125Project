@@ -1,4 +1,5 @@
 ﻿using CS4125Project.Models;
+using CS4125Project.Models.EmployeeModels;
 using CS4125Project.Observer;
 using CsvHelper;
 using Microsoft.AspNetCore.Mvc;
@@ -9,9 +10,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using CS4125Project.Controllers;
-using CS4125Project.Models.EmployeeModels;
 
 namespace CS4125Project.Controllers
 {
@@ -61,7 +59,8 @@ namespace CS4125Project.Controllers
                 csv.Context.RegisterClassMap<EmployeeMapperModel>();
                 var records = csv.GetRecords<EmployeeModel>();
                 List<EmployeeModel> employees = records.ToList();
-                foreach(EmployeeModel employee in employees) {
+                foreach (EmployeeModel employee in employees)
+                {
                     employeesList.Add(employee);
                 }
 

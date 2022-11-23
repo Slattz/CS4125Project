@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using CS4125Project.Controllers.EmployeeControllers;
+﻿using CS4125Project.Controllers.EmployeeControllers;
+using System.Collections.Generic;
 
 namespace CS4125Project.Models.PayrollModels
 {
