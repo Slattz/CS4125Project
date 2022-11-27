@@ -7,6 +7,7 @@ namespace CS4125Project.Controllers.EmployeeServices
     {
         public ManagerController(EmployeeControllerBase controllerBase) : base(controllerBase)
         {
+
         }
 
         public override IActionResult GetView()
