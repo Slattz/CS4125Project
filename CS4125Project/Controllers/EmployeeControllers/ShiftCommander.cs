@@ -2,7 +2,7 @@
 
 namespace CS4125Project.Controllers.EmployeeServices
 {
-    class Invoker
+    class ShiftCommander
     {
         private Command toExecute;
 

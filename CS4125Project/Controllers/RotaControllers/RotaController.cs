@@ -1,4 +1,5 @@
 ﻿using CS4125Project.Controllers.EmployeeControllers;
+using CS4125Project.Controllers.EmployeeServices;
 using CS4125Project.Models;
 using CS4125Project.Models.EmployeeModels;
 using CS4125Project.Models.RotaModels;
@@ -109,10 +110,13 @@ namespace CS4125Project.Controllers.RotaControllers
 
         public void assignWeeksShifts()
         {
+            ShiftCommander commader = new ShiftCommander();
             Dictionary<int, EmployeeModel> shiftEmployeeMap = selector.getEmployeesToCover(rota.shifts, rota.employees);
             foreach(KeyValuePair<int, EmployeeModel> mapping in shiftEmployeeMap)
             {
-                this.AssignShift(mapping.Value, mapping.Key);
+                AssignShiftCommand assignCommand = new AssignShiftCommand(mapping.Value, mapping.Key, this);
+                commader.SetToExecute(assignCommand);
+                commader.Execute();
             }
         }
     }
