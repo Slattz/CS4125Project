@@ -1,4 +1,5 @@
-﻿using CS4125Project.Models;
+﻿using CS4125Project.Controllers.EmployeeControllers;
+using CS4125Project.Models;
 using CS4125Project.Models.EmployeeModels;
 using CS4125Project.Models.RotaModels;
 using CS4125Project.Observer;
@@ -15,6 +16,7 @@ namespace CS4125Project.Controllers.RotaControllers
         private readonly ILogger<RotaController> _logger;
         private RotaModel rota;
         private List<IObserver> _observers = new List<IObserver>();
+        private EmployeeSelector selector = new EmployeeSelector();
 
         public RotaController(ILogger<RotaController> logger, RotaModel r)
         {
@@ -103,6 +105,15 @@ namespace CS4125Project.Controllers.RotaControllers
             Console.WriteLine("\nSubject: I'm updating the current rota");
 
             this.Notify();
+        }
+
+        public void assignWeeksShifts()
+        {
+            Dictionary<int, EmployeeModel> shiftEmployeeMap = selector.getEmployeesToCover(rota.shifts, rota.employees);
+            foreach(KeyValuePair<int, EmployeeModel> mapping in shiftEmployeeMap)
+            {
+                this.AssignShift(mapping.Value, mapping.Key);
+            }
         }
     }
 }
