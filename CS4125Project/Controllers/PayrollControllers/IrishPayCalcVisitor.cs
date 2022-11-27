@@ -8,7 +8,7 @@ public class IrishPayCalcVisitor : IPayCalcVisitor
     public float VisitEmployee(EmployeeControllerBase employee)
     {
         //Super complicated ultra powerful calculator
-        float base_pay = 1000;
+        float base_pay = employee.employeeModel.basePay;
         base_pay -= CalculateUSC(base_pay);
         base_pay -= CalculatePRSI(base_pay);
         base_pay -= CalculateTax(base_pay);
@@ -18,7 +18,7 @@ public class IrishPayCalcVisitor : IPayCalcVisitor
     public float VisitManager(ManagerController manager)
     {
         //Super complicated ultra powerful calculator
-        float base_pay = 10000;
+        float base_pay = manager.employeeModel.basePay;
         base_pay -= CalculateUSC(base_pay);
         base_pay -= CalculatePRSI(base_pay);
         base_pay -= CalculateTax(base_pay);
@@ -28,7 +28,7 @@ public class IrishPayCalcVisitor : IPayCalcVisitor
     public float VisitGeneralManager(GeneralManagerController gManager)
     {
         //Super complicated ultra powerful calculator
-        float base_pay = 100000;
+        float base_pay = gManager.employeeModel.basePay;
         base_pay -= CalculateUSC(base_pay);
         base_pay -= CalculatePRSI(base_pay);
         base_pay -= CalculateTax(base_pay);

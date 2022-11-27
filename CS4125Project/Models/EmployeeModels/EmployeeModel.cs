@@ -13,6 +13,7 @@
         public float holidays;
         public AuthLevel level;
         public string notification;
+        public float basePay;
 
         public override string ToString()
         {
