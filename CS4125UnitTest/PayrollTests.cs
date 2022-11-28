@@ -14,7 +14,7 @@ namespace CS4125UnitTest
             IPayCalcVisitor visitor = new IrishPayCalcVisitor();
             EmployeeModel employee = new EmployeeModel();
             employee.level = AuthLevel.Worker;
-            employee.id = 1;
+            employee.SetID(1);
             employee.basePay = 1000;
             WorkerController controller = (WorkerController)EmployeeFactory.GetEmployeeController(employee);
             float wage = controller.AcceptCalc(visitor);
@@ -27,7 +27,7 @@ namespace CS4125UnitTest
             IPayCalcVisitor visitor = new IrishPayCalcVisitor();
             EmployeeModel employee = new EmployeeModel();
             employee.level = AuthLevel.Manager;
-            employee.id = 2;
+            employee.SetID(2);
             employee.basePay = 10000;
             ManagerController controller = (ManagerController)EmployeeFactory.GetEmployeeController(employee);
             float wage = controller.AcceptCalc(visitor);
@@ -40,7 +40,7 @@ namespace CS4125UnitTest
             IPayCalcVisitor visitor = new IrishPayCalcVisitor();
             EmployeeModel employee = new EmployeeModel();
             employee.level = AuthLevel.GeneralManager;
-            employee.id = 3;
+            employee.SetID(3);
             employee.basePay = 100000;
             GeneralManagerController controller = (GeneralManagerController)EmployeeFactory.GetEmployeeController(employee);
             float wage = controller.AcceptCalc(visitor);

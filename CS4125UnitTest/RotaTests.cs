@@ -1,3 +1,4 @@
+using CS4125Project.Controllers;
 using CS4125Project.Controllers.EmployeeControllers;
 using CS4125Project.Controllers.EmployeeServices;
 using CS4125Project.Controllers.PayrollControllers;
@@ -21,18 +22,21 @@ namespace CS4125UnitTest
             RotaModel rmodel = new RotaModel();
             ShiftModel shift = new ShiftModel();
             shift.id = 1;
-            shift.employeeID = -1;
             rmodel.shifts = new List<ShiftModel> { shift };
             RotaController rota = new RotaController(logger, rmodel);
+
             var res = rota.Index();
             Assert.IsInstanceOfType(res, typeof(ViewResult));
             res = rota.Privacy();
             Assert.IsInstanceOfType(res, typeof(ViewResult));
-            EmployeeModel emp = new EmployeeModel();
-            //IObserver rotaObserver = ;
-            emp.id = 1;
-            rota.AssignShift(emp, shift.id);
-            //Assert.IsTrue()
+
+            ILogger<HomeController> plogger = new Logger<HomeController>(factory);
+            PayrollController rotaObserver = new PayrollController(plogger);
+            List<EmployeeModel> emps = rotaObserver.GetEmployeesFromSerializable();
+            rota.Attach(rotaObserver);
+            rota.AssignShift(emps.First(), shift.id);
+            rota.Notify();
+            Assert.IsNotNull(emps.First().notification);
         }
     }
 }

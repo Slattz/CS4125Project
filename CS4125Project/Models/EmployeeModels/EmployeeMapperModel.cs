@@ -15,6 +15,7 @@ namespace CS4125Project.Models
             Map(m => m.holidays).Index(5).Name("holidays");
             Map(m => m.level).Index(6).Name("level");
             Map(m => m.notification).Index(7).Name("notification");
+            Map(m => m.basePay).Index(8).Name("basePay");
         }
     }
 }
