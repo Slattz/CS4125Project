@@ -21,16 +21,35 @@ namespace CS4125Project.Controllers.EmployeeServices
             return visitor.VisitManager(this);
         }
 
-        public void approveRequest(int requestId, bool approve)
+        public void approveRequest(WorkerRequestModel request, bool approve)
         {
-            foreach(WorkerRequestModel request in this.requests.openRequests){
-                if(request.requestID == requestId)
-                {
-                    request.approved = approve;
-                    this.requests.closedRequests.Add(request);
-                    this.requests.closedRequests.Remove(request);
+            request.approved = approve;
+            this.requests.closedRequests.Add(request);
+            this.requests.closedRequests.Remove(request);
+        }
+
+        public void approveShiftSwap(int requestID)
+        {
+            ShiftSwapModel shiftRequest = (ShiftSwapModel)getRequest(requestID);
+            if (shiftRequest.newWorkerAgreed)
+            {
+                //change workerID on rota here
+            }
+            approveRequest(shiftRequest, shiftRequest.newWorkerAgreed);
+
+        }
+
+        private WorkerRequestModel getRequest(int rID)
+        {
+            foreach (WorkerRequestModel request in this.requests.openRequests)
+            {
+                if (request.requestID == rID)
+                { 
+                    return request;
                 }
             }
+            return null;
         }
+        
     }
 }
