@@ -47,7 +47,7 @@ namespace CS4125Project.Controllers.EmployeeControllers
                 if(request.requestID == requestId)
                 {
                     ShiftSwapModel swapRequest = (ShiftSwapModel)request;
-                    if(swapRequest.newWorkerId == this.employeeModel.id)
+                    if(swapRequest.newWorkerId == this.employeeModel.GetID())
                     {
                         swapRequest.newWorkerAgreed = true;
                     }
@@ -62,7 +62,7 @@ namespace CS4125Project.Controllers.EmployeeControllers
             holRequest.startDate = start;
             holRequest.endDate = end;
             holRequest.approved = false;
-            holRequest.WorkerID = employeeModel.id;
+            holRequest.WorkerID = employeeModel.GetID();
             holRequest.requestID = getNextRequestId();
             this.requests.openRequests.Add(holRequest);
         }
@@ -71,7 +71,7 @@ namespace CS4125Project.Controllers.EmployeeControllers
         {
             SickDayRequestModel sickRequest = new SickDayRequestModel();
             sickRequest.shiftId = shiftId;
-            sickRequest.WorkerID = employeeModel.id;
+            sickRequest.WorkerID = employeeModel.GetID();
             sickRequest.approved = false;
             sickRequest.requestID = getNextRequestId();
             this.requests.openRequests.Add(sickRequest);

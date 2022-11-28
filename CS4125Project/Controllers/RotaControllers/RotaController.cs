@@ -48,7 +48,7 @@ namespace CS4125Project.Controllers.RotaControllers
             {
                 if (shiftID == s.id)
                 {
-                    s.employeeID = emp.id;
+                    s.employeeID = emp.GetID();
                     return true;
                 }
             }

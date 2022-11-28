@@ -17,7 +17,7 @@
 
         public override string ToString()
         {
-            return name + " " + id + " " + email + " " + role + " " + sickDays + " " + holidays + " " + level + " " + notification;
+            return GetName() + " " + GetID() + " " + GetEmail() + " " + role + " " + sickDays + " " + holidays + " " + level + " " + notification;
         }
     }
 }
