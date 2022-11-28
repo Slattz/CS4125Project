@@ -64,10 +64,9 @@ namespace CS4125Project.Controllers.RotaControllers
             emp.level = level;
             emp.notification = null;
             emp.basePay = basePay;
-            emp.name = name;
-            emp.email = email;
-            emp.id = rota.employees.Count;
-            rota.employees.Add(emp);
+            emp.SetName(name);
+            emp.SetEmail(email);
+            emp.SetID(rota.employees.Count);
         }
 
         /*[HttpPost]
