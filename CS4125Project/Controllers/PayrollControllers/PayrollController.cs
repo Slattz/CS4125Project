@@ -11,7 +11,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 
-namespace CS4125Project.Controllers
+namespace CS4125Project.Controllers.PayrollControllers
 {
     public class PayrollController : Controller, IObserver
     {

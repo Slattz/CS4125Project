@@ -1,15 +1,17 @@
 ﻿
 using CS4125Project.Controllers.EmployeeControllers;
 using CS4125Project.Controllers.EmployeeServices;
-using CS4125Project.Controllers.PayrollControllers;
 using System.Diagnostics.Contracts;
 
-[ContractClass(typeof(PayCalcContract))]
-public interface IPayCalcVisitor
+namespace CS4125Project.Controllers.PayrollControllers
 {
-    float VisitEmployee(EmployeeControllerBase employee);
+    [ContractClass(typeof(PayCalcContract))]
+    public interface IPayCalcVisitor
+    {
+        float VisitEmployee(EmployeeControllerBase employee);
 
-    float VisitManager(ManagerController manager);
+        float VisitManager(ManagerController manager);
 
-    float VisitGeneralManager(GeneralManagerController gManager);
+        float VisitGeneralManager(GeneralManagerController gManager);
+    }
 }
