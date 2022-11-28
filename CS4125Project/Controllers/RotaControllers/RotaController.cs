@@ -55,6 +55,21 @@ namespace CS4125Project.Controllers.RotaControllers
             return false;
         }
 
+        public void AddEmployee(string role, AuthLevel level, float basePay, string name, string email)
+        {
+            EmployeeModel emp = new EmployeeModel();
+            emp.role = role;
+            emp.sickDays = (float)4;
+            emp.holidays = (float)20;
+            emp.level = level;
+            emp.notification = null;
+            emp.basePay = basePay;
+            emp.name = name;
+            emp.email = email;
+            emp.id = rota.employees.Count;
+            rota.employees.Add(emp);
+        }
+
         /*[HttpPost]
         public DateTime AddShift(string role, Day workday, DateTime startTime, DateTime endTime)
         {
