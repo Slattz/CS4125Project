@@ -1,6 +1,6 @@
 ﻿namespace CS4125Project.Models.EmployeeModels
 {
-    public class SickDayRequestModel:WorkerRequestModel
+    public class ShortNoticeRequest:WorkerRequestModel
     {
         public int shiftId;
     }

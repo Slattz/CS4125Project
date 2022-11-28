@@ -1,6 +1,10 @@
-﻿namespace CS4125Project.Models.EmployeeModels
+﻿using System;
+
+namespace CS4125Project.Models.EmployeeModels
 {
-    public class HolidayRequestModel
+    public class HolidayRequestModel:WorkerRequestModel
     {
+        public DateTime startDate;
+        public DateTime endDate;
     }
 }
