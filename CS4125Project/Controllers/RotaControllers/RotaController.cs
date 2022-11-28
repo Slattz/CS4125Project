@@ -64,13 +64,30 @@ namespace CS4125Project.Controllers.RotaControllers
         [HttpPost]
         public void RemoveShift(int shiftID)
         {
+            foreach (ShiftModel s in rota.shifts)
+            {
+                if (shiftID == s.id)
+                {
+                    rota.shifts.Remove(s);
+                }
+            }
+        }
 
+        public void AddShift(ShiftModel shift)
+        {
+            rota.shifts.Add(shift);
         }
 
         [HttpPost]
         public void UnassignShift(int shiftID)
         {
-
+            foreach (ShiftModel s in rota.shifts)
+            {
+                if (shiftID == s.id)
+                {
+                    s.employeeID = -1;
+                }
+            }
         }
 
         [HttpPost]
