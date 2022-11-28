@@ -5,41 +5,45 @@ namespace CS4125Project.Models.EmployeeModels
     public class UserModel
     {
 
-        public string name { 
+        private string name;
 
-            get { 
-                return name; 
-            } 
+        private int id;
 
-            set { 
-                Contract.Requires(value.Split(" ").Length > 1); 
-            } 
+        private string email;
 
+        public string GetEmail()
+        {
+            return email;
         }
 
-        public int id { 
-
-            get { 
-                return id;  
-            } 
-            
-            set { 
-                Contract.Requires(value > 0); 
-            } 
-
+        public void SetEmail(string value)
+        {
+            Contract.Requires(value.Contains("@") && value.Contains("."));
+            email = value;
         }
 
-        public string email { 
-            
-            get { 
-                return email; 
-            }  
-            
-            set { 
-                Contract.Requires(value.Contains("@") && value.Contains(".")); 
-            } 
-
+        public string GetName()
+        {
+            return name;
         }
+
+        public void SetName(string value)
+        {
+            Contract.Requires(value.Split(" ").Length > 1);
+            name = value;
+        }
+
+        public int GetID()
+        {
+            return id;
+        }
+
+        public void SetID(int value)
+        {
+            Contract.Requires(value > 0);
+            id = value;
+        }
+
 
     }
 }
