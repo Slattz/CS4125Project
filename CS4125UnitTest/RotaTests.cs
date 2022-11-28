@@ -14,8 +14,12 @@ namespace CS4125UnitTest
     [TestClass]
     public class RotaTests
     {
-        [TestMethod]
-        public void TestRota()
+        private RotaController? rota;
+        private List<EmployeeModel>? emps;
+
+
+        [TestInitialize]
+        public void Initialize()
         {
             LoggerFactory factory = new LoggerFactory();
             ILogger<RotaController> logger = new Logger<RotaController>(factory);
@@ -23,20 +27,45 @@ namespace CS4125UnitTest
             ShiftModel shift = new ShiftModel();
             shift.id = 1;
             rmodel.shifts = new List<ShiftModel> { shift };
-            RotaController rota = new RotaController(logger, rmodel);
-
-            var res = rota.Index();
-            Assert.IsInstanceOfType(res, typeof(ViewResult));
-            res = rota.Privacy();
-            Assert.IsInstanceOfType(res, typeof(ViewResult));
 
             ILogger<HomeController> plogger = new Logger<HomeController>(factory);
             PayrollController rotaObserver = new PayrollController(plogger);
-            List<EmployeeModel> emps = rotaObserver.GetEmployeesFromSerializable();
+            emps = rotaObserver.GetEmployeesFromSerializable();
+            rmodel.employees = emps;
+            rota = new RotaController(logger, rmodel);
             rota.Attach(rotaObserver);
-            rota.AssignShift(emps.First(), shift.id);
-            rota.Notify();
-            Assert.IsNotNull(emps.First().notification);
+        }
+
+        [TestMethod]
+        public void TestRotaViews()
+        {
+            var res = rota!.Index();
+            Assert.IsInstanceOfType(res, typeof(ViewResult));
+            res = rota.Privacy();
+            Assert.IsInstanceOfType(res, typeof(ViewResult));
+        }
+
+        [TestMethod]
+        public void TestRotaShiftManagement()
+        {
+            rota!.AssignShift(emps!.First(), 1);
+            var notification = emps!.First().notification;
+            Assert.AreNotEqual(notification, "");
+
+            rota!.UnassignShift(1);
+            Assert.AreNotEqual(notification, emps!.First().notification);
+            notification = emps!.First().notification;
+
+            rota!.RemoveShift(1);
+            Assert.AreNotEqual(notification, emps!.First().notification);
+            notification = emps!.First().notification;
+        }
+        [TestMethod]
+        public void TestRotaWeeksShifts()
+        {
+            rota!.assignWeeksShifts();
+            var notification = emps!.First().notification;
+            Assert.AreNotEqual(notification, "");
         }
     }
 }

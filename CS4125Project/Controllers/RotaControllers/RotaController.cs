@@ -49,6 +49,7 @@ namespace CS4125Project.Controllers.RotaControllers
                 if (shiftID == s.id)
                 {
                     s.employeeID = emp.GetID();
+                    Notify();
                     return true;
                 }
             }
@@ -67,6 +68,7 @@ namespace CS4125Project.Controllers.RotaControllers
             emp.SetName(name);
             emp.SetEmail(email);
             emp.SetID(rota.employees.Count);
+            Notify();
         }
 
         /*[HttpPost]
@@ -85,11 +87,13 @@ namespace CS4125Project.Controllers.RotaControllers
                     rota.shifts.Remove(s);
                 }
             }
+            Notify();
         }
 
         public void AddShift(ShiftModel shift)
         {
             rota.shifts.Add(shift);
+            Notify();
         }
 
         [HttpPost]
@@ -102,6 +106,7 @@ namespace CS4125Project.Controllers.RotaControllers
                     s.employeeID = -1;
                 }
             }
+            Notify();
         }
 
         [HttpPost]
@@ -136,7 +141,7 @@ namespace CS4125Project.Controllers.RotaControllers
         {
             Console.WriteLine("\nSubject: I'm updating the current rota");
 
-            this.Notify();
+            Notify();
         }
 
         public void assignWeeksShifts()
@@ -149,6 +154,7 @@ namespace CS4125Project.Controllers.RotaControllers
                 commader.SetToExecute(assignCommand);
                 commader.Execute();
             }
+            Notify();
         }
     }
 }

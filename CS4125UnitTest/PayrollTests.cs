@@ -16,7 +16,7 @@ namespace CS4125UnitTest
             employee.level = AuthLevel.Worker;
             employee.SetID(1);
             employee.basePay = 1000;
-            WorkerController controller = (WorkerController)EmployeeFactory.GetEmployeeController(employee);
+            EmployeeControllerBase controller = EmployeeFactory.GetEmployeeController(employee);
             float wage = controller.AcceptCalc(visitor);
             Assert.AreEqual(employee.basePay - 90, wage);
         }
@@ -29,7 +29,7 @@ namespace CS4125UnitTest
             employee.level = AuthLevel.Manager;
             employee.SetID(2);
             employee.basePay = 10000;
-            ManagerController controller = (ManagerController)EmployeeFactory.GetEmployeeController(employee);
+            EmployeeControllerBase controller = EmployeeFactory.GetEmployeeController(employee);
             float wage = controller.AcceptCalc(visitor);
             Assert.AreEqual(employee.basePay - 90, wage);
         }
@@ -42,7 +42,7 @@ namespace CS4125UnitTest
             employee.level = AuthLevel.GeneralManager;
             employee.SetID(3);
             employee.basePay = 100000;
-            GeneralManagerController controller = (GeneralManagerController)EmployeeFactory.GetEmployeeController(employee);
+            EmployeeControllerBase controller = EmployeeFactory.GetEmployeeController(employee);
             float wage = controller.AcceptCalc(visitor);
             Assert.AreEqual(employee.basePay - 90, wage);
         }

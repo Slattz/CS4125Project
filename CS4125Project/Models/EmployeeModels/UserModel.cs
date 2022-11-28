@@ -5,11 +5,11 @@ namespace CS4125Project.Models.EmployeeModels
     public class UserModel
     {
 
-        private string name;
+        internal string name;
 
-        private int id;
+        internal int id;
 
-        private string email;
+        internal string email;
 
         public string GetEmail()
         {
