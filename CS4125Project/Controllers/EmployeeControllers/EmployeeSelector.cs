@@ -2,6 +2,7 @@
 using CS4125Project.Models.EmployeeModels;
 using System.Collections.Generic;
 using System;
+using CS4125Project.Controllers.DatabaseControllers;
 
 namespace CS4125Project.Controllers.EmployeeControllers
 {
@@ -23,8 +24,7 @@ namespace CS4125Project.Controllers.EmployeeControllers
         {
             //algorithm for getting available employee here
             var random = new Random();
-            List<EmployeeModel> employees = new List<EmployeeModel>();
-            //insert db call to get employees here
+            List<EmployeeModel> employees = DatabaseController.GetEmployeesFromSerializable();
             int index = random.Next(employees.Count);
             return employees[index];
         }
