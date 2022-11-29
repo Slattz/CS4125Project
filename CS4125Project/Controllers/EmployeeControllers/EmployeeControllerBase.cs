@@ -25,11 +25,11 @@ namespace CS4125Project.Controllers.EmployeeControllers
             return visitor.VisitEmployee(this);
         }
 
-        public void requestShiftSwap(int shiftID, int employeeID, int newEmployeeID)
+        public void requestShiftSwap(int shiftID, int newEmployeeID)
         {
             ShiftSwapModel swapRequest = new ShiftSwapModel();
             swapRequest.approved = false;
-            swapRequest.WorkerID = employeeID;
+            swapRequest.WorkerID = this.employeeModel.id;
             swapRequest.requestID = newEmployeeID;
             swapRequest.newWorkerAgreed = false;
             swapRequest.shiftId = shiftID;
