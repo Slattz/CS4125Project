@@ -8,8 +8,8 @@ namespace CS4125Project.Controllers.EmployeeControllers
     //
     public class EmployeeControllerBase : Controller
     {
-        public EmployeeModel employeeModel;
-        public RequestsModel requests;
+        protected EmployeeModel employeeModel;
+        protected RequestsModel requests;
 
         public EmployeeControllerBase()
         {
@@ -77,7 +77,7 @@ namespace CS4125Project.Controllers.EmployeeControllers
             this.requests.openRequests.Add(sickRequest);
         }
 
-        private int getNextRequestId()
+        protected int getNextRequestId()
         {
             return requests.openRequests.Count + requests.closedRequests.Count + 1;
         }
