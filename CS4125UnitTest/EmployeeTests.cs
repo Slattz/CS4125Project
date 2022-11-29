@@ -45,8 +45,8 @@ namespace CS4125UnitTest
             worker.requestShiftSwap(1, 2);
             Assert.AreEqual(curId + 1, worker.getNextRequestId());
             curId = worker.getNextRequestId();
-            manager!.ApproveShiftSwap(curId - 1, true);
             worker.agreeShiftSwap(curId - 1);
+            manager!.ApproveShiftSwap(curId - 1, true);
             Assert.AreEqual(curId, worker.getNextRequestId());
         }
 
@@ -76,8 +76,12 @@ namespace CS4125UnitTest
         [TestMethod]
         public void TestShortNotice()
         {
-            //SetupScenario();
-            //int curId = manager!.getNextRequestId();
+            SetupScenario();
+            int curId = worker!.getNextRequestId();
+            ShortNoticeRequest req = new ShortNoticeRequest { shiftId = 1 };
+            manager!.ApproveShortNoticeRequest(req, true);
+            worker!.agreeShortNotice(req);
+            Assert.AreEqual(curId + 1, worker.getNextRequestId());
         }
 
         private void SetupScenario()

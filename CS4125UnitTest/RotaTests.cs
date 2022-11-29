@@ -16,6 +16,7 @@ namespace CS4125UnitTest
         private RotaController? rota;
         private List<EmployeeModel>? emps;
         private ShiftModel? shift;
+        private PayrollController? observer;
 
 
         [TestInitialize]
@@ -32,8 +33,8 @@ namespace CS4125UnitTest
             rmodel.employees = DatabaseController.GetEmployeesFromSerializable();
             rota = new RotaController(logger, rmodel);
             emps = rota.GetEmployees();
-            PayrollController rotaObserver = new PayrollController(plogger, DatabaseController.ModelToEmployee(emps));
-            rota.Attach(rotaObserver);
+            observer = new PayrollController(plogger, DatabaseController.ModelToEmployee(emps));
+            rota.Attach(observer);
         }
 
         [TestMethod]
@@ -43,6 +44,13 @@ namespace CS4125UnitTest
             Assert.IsInstanceOfType(res, typeof(ViewResult));
             res = rota.Privacy();
             Assert.IsInstanceOfType(res, typeof(ViewResult));
+            try
+            {
+                res = rota!.Error();
+            } catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(res, typeof(ViewResult));
+            }
         }
 
         [TestMethod]
@@ -73,6 +81,16 @@ namespace CS4125UnitTest
             int count = rota!.GetEmployees().Count();
             rota!.AddEmployee("boss babe", AuthLevel.GeneralManager, (float)42069.05, "Nicki Minaj", "boo@slay.org");
             Assert.IsTrue(count + 1 == rota!.GetEmployees().Count());
+        }
+
+        [TestMethod]
+        public void TestAddShift()
+        {
+            var notification = emps!.First().notification;
+            rota!.Detach(observer);
+            rota.AddShift(new ShiftModel());
+            rota!.UpdateCurrentRota();
+            Assert.AreEqual(notification, emps!.First().notification);
         }
     }
 }
