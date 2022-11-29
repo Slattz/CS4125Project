@@ -9,7 +9,7 @@ namespace CS4125Project.Controllers.EmployeeControllers
     {
         protected EmployeeControllerBase controllerBase = null;
 
-        public EmployeeBaseDecorator(EmployeeControllerBase controllerBase)
+        public EmployeeBaseDecorator(EmployeeControllerBase controllerBase, EmployeeModel model) : base(model)
         {
             this.controllerBase = controllerBase;
         }

@@ -1,25 +1,27 @@
-﻿using CS4125Project.Models;
+﻿using CS4125Project.Controllers.DatabaseControllers;
+using CS4125Project.Controllers.EmployeeControllers;
+using CS4125Project.Models;
 using CS4125Project.Models.EmployeeModels;
+using CS4125Project.Models.PayrollModels;
 using CS4125Project.Observer;
-using CsvHelper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.Linq;
 
 namespace CS4125Project.Controllers.PayrollControllers
 {
     public class PayrollController : Controller, IObserver
     {
         private readonly ILogger<HomeController> _logger;
+        private PayrollModel pmodel;
 
-        public PayrollController(ILogger<HomeController> logger)
+        public PayrollController(ILogger<HomeController> logger, List<EmployeeControllerBase> emps)
         {
             _logger = logger;
+            pmodel = new PayrollModel();
+            pmodel.employees = emps;
         }
 
         public IActionResult Index()
@@ -40,43 +42,13 @@ namespace CS4125Project.Controllers.PayrollControllers
 
         public void Update(ISubject subject)
         {
-            List<EmployeeModel> employees = GetEmployeesFromSerializable();
 
             //for each employee in payroll, notify them that a new rota is available
-            foreach (EmployeeModel employee in employees)
+            foreach (EmployeeControllerBase employee in pmodel.employees)
             {
-                employee.notification = "New rota available as of: " + DateTime.Now.ToString();
+                employee.employeeModel.notification = "New rota available as of: " + DateTime.Now.ToString();
             }
-            SerializeEmployees(employees);
-        }
-
-        public List<EmployeeModel> GetEmployeesFromSerializable()
-        {
-            List<EmployeeModel> employeesList = new List<EmployeeModel>();
-            using (var reader = new StreamReader("CSV\\Employees.txt"))
-            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
-            {
-                csv.Context.RegisterClassMap<EmployeeMapperModel>();
-                var records = csv.GetRecords<EmployeeModel>();
-                List<EmployeeModel> employees = records.ToList();
-                foreach (EmployeeModel employee in employees)
-                {
-                    employeesList.Add(employee);
-                }
-
-            }
-            return employeesList;
-        }
-
-        public void SerializeEmployees(List<EmployeeModel> employees)
-        {
-            using (var reader = new StreamWriter("CSV\\Employees.txt"))
-            using (var csv = new CsvWriter(reader, CultureInfo.InvariantCulture))
-            {
-                csv.Context.RegisterClassMap<EmployeeMapperModel>();
-                csv.WriteRecords(employees);
-
-            }
+            DatabaseController.SerializeEmployees(pmodel.employees);
         }
     }
 }

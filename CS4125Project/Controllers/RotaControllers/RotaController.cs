@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace CS4125Project.Controllers.RotaControllers
 {
@@ -71,6 +72,11 @@ namespace CS4125Project.Controllers.RotaControllers
             Notify();
         }
 
+        public List<EmployeeModel> GetEmployees()
+        {
+            return rota.employees;
+        }
+
         /*[HttpPost]
         public DateTime AddShift(string role, Day workday, DateTime startTime, DateTime endTime)
         {
@@ -80,7 +86,7 @@ namespace CS4125Project.Controllers.RotaControllers
         [HttpPost]
         public void RemoveShift(int shiftID)
         {
-            foreach (ShiftModel s in rota.shifts)
+            foreach (ShiftModel s in rota.shifts.ToList())
             {
                 if (shiftID == s.id)
                 {
@@ -107,6 +113,11 @@ namespace CS4125Project.Controllers.RotaControllers
                 }
             }
             Notify();
+        }
+
+        public List<ShiftModel> GetShifts()
+        {
+            return rota.shifts;
         }
 
         [HttpPost]

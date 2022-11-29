@@ -11,10 +11,6 @@ namespace CS4125Project.Controllers.EmployeeControllers
         public EmployeeModel employeeModel;
         public RequestsModel requests;
 
-        public EmployeeControllerBase()
-        {
-            this.employeeModel = new EmployeeModel();
-        }
         public EmployeeControllerBase(EmployeeModel employeeModel)
         {
             this.employeeModel = employeeModel;

@@ -20,7 +20,7 @@ namespace CS4125Project.Controllers.PayrollControllers
         public float VisitManager(ManagerController manager)
         {
             //Super complicated ultra powerful calculator
-            float base_pay = manager.employeeModel.basePay;
+            float base_pay = (float)(1.1 * manager.employeeModel.basePay);
             base_pay -= CalculateUSC(base_pay);
             base_pay -= CalculatePRSI(base_pay);
             base_pay -= CalculateTax(base_pay);
@@ -30,7 +30,7 @@ namespace CS4125Project.Controllers.PayrollControllers
         public float VisitGeneralManager(GeneralManagerController gManager)
         {
             //Super complicated ultra powerful calculator
-            float base_pay = gManager.employeeModel.basePay;
+            float base_pay = (float)(1.2 * gManager.employeeModel.basePay);
             base_pay -= CalculateUSC(base_pay);
             base_pay -= CalculatePRSI(base_pay);
             base_pay -= CalculateTax(base_pay);

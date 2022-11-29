@@ -7,20 +7,20 @@ namespace CS4125Project.Controllers.EmployeeControllers
     {
         public static EmployeeControllerBase GetEmployeeController(EmployeeModel model)
         {
-            EmployeeControllerBase employeeController = new EmployeeBaseDecorator(new EmployeeControllerBase(model));
-            if (model.level == AuthLevel.Worker)
+            EmployeeControllerBase employeeController = new EmployeeBaseDecorator(new EmployeeControllerBase(model), model);
+            if (model.level >= AuthLevel.Worker)
             {
-                employeeController = new WorkerController(employeeController);
+                employeeController = new WorkerController(employeeController, model);
             }
 
-            if (model.level == AuthLevel.Manager)
+            if (model.level >= AuthLevel.Manager)
             {
-                employeeController = new ManagerController(employeeController);
+                employeeController = new ManagerController(employeeController, model);
             }
 
-            if (model.level == AuthLevel.GeneralManager)
+            if (model.level >= AuthLevel.GeneralManager)
             {
-                employeeController = new GeneralManagerController(employeeController);
+                employeeController = new GeneralManagerController(employeeController, model);
             }
 
             return employeeController;

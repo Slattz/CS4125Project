@@ -7,7 +7,7 @@ namespace CS4125Project.Controllers.EmployeeServices
 {
     public class ManagerController : EmployeeBaseDecorator
     {
-        public ManagerController(EmployeeControllerBase controllerBase) : base(controllerBase)
+        public ManagerController(EmployeeControllerBase controllerBase, EmployeeModel model) : base(controllerBase, model)
         {
 
         }
