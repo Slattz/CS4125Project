@@ -6,19 +6,6 @@ namespace CS4125Project.Models.EmployeeModels
     {
         public int WorkerID;
         public bool approved;
-        public int requestID
-        {
-
-            get
-            {
-                return requestID;
-            }
-
-            set
-            {
-                Contract.Requires(value > 0);
-            }
-
-        }
+        public int requestID;
     }
 }
