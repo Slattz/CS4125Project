@@ -73,6 +73,13 @@ namespace CS4125Project.Controllers.EmployeeControllers
             this.requests.openRequests.Add(sickRequest);
         }
 
+        public void agreeShortNotice(ShortNoticeRequest request)
+        {
+            request.approved = true;
+            this.requests.closedRequests.Add(request);
+            this.requests.openRequests.Remove(request);
+        }
+
         protected int getNextRequestId()
         {
             return requests.openRequests.Count + requests.closedRequests.Count + 1;
