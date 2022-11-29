@@ -8,7 +8,7 @@ namespace CS4125Project.Controllers.EmployeeControllers
     //
     public class EmployeeControllerBase : Controller
     {
-        protected EmployeeModel employeeModel;
+        internal EmployeeModel employeeModel;
         protected RequestsModel requests;
 
         public EmployeeControllerBase(EmployeeModel employeeModel)

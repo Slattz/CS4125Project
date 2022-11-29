@@ -8,7 +8,6 @@ namespace CS4125Project.Controllers.EmployeeServices
 {
     public class ManagerController : EmployeeBaseDecorator
     {
-        List<EmployeeModel> employees;
         public ManagerController(EmployeeControllerBase controllerBase, EmployeeModel model) : base(controllerBase, model)
         {
 
