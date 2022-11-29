@@ -16,9 +16,7 @@ namespace CS4125Project.Controllers.EmployeeServices
 
         public int AddEmployee(string name, string email, string role)
         {
-            Contract.Requires(IsValidEmail(email));
-            int id = 10;
-            Contract.Ensures(id > 0);
+            int id = 0;
             return id;
         }
         public override IActionResult GetView()

@@ -5,9 +5,9 @@ using System;
 
 namespace CS4125Project.Controllers.EmployeeControllers
 {
-    public class EmployeeSelector
+    public static class EmployeeSelector
     {
-        public Dictionary<int, EmployeeModel> getEmployeesToCover(List<ShiftModel> shifts, List<EmployeeModel> employees)
+        public static Dictionary<int, EmployeeModel> getEmployeesToCover(List<ShiftModel> shifts, List<EmployeeModel> employees)
         {
             //alogrithm used to figure out who should cover a given shift
             Dictionary<int, EmployeeModel> shiftEmployeeMap = new Dictionary<int, EmployeeModel>();
@@ -17,6 +17,16 @@ namespace CS4125Project.Controllers.EmployeeControllers
                 shiftEmployeeMap.Add(shift.id, employees[random.Next(employees.Count)]);
             }
             return shiftEmployeeMap;
+        }
+
+        public static EmployeeModel getAvailableEMployee(int shiftID)
+        {
+            //algorithm for getting available employee here
+            var random = new Random();
+            List<EmployeeModel> employees = new List<EmployeeModel>();
+            //insert db call to get employees here
+            int index = random.Next(employees.Count);
+            return employees[index];
         }
     }
 }

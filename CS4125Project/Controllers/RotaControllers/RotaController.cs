@@ -18,7 +18,6 @@ namespace CS4125Project.Controllers.RotaControllers
         private readonly ILogger<RotaController> _logger;
         private RotaModel rota;
         private List<IObserver> _observers = new List<IObserver>();
-        private EmployeeSelector selector = new EmployeeSelector();
 
         public RotaController(ILogger<RotaController> logger, RotaModel r)
         {
@@ -158,7 +157,7 @@ namespace CS4125Project.Controllers.RotaControllers
         public void assignWeeksShifts()
         {
             ShiftCommander commader = new ShiftCommander();
-            Dictionary<int, EmployeeModel> shiftEmployeeMap = selector.getEmployeesToCover(rota.shifts, rota.employees);
+            Dictionary<int, EmployeeModel> shiftEmployeeMap = EmployeeSelector.getEmployeesToCover(rota.shifts, rota.employees);
             foreach(KeyValuePair<int, EmployeeModel> mapping in shiftEmployeeMap)
             {
                 AssignShiftCommand assignCommand = new AssignShiftCommand(mapping.Value, mapping.Key, this);
