@@ -2,6 +2,7 @@
 using CS4125Project.Controllers.PayrollControllers;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 
 namespace CS4125Project.Controllers.EmployeeControllers
 {
@@ -14,6 +15,11 @@ namespace CS4125Project.Controllers.EmployeeControllers
         public EmployeeControllerBase(EmployeeModel employeeModel)
         {
             this.employeeModel = employeeModel;
+            requests = new RequestsModel()
+            {
+                openRequests = new List<WorkerRequestModel>(),
+                closedRequests = new List<WorkerRequestModel>()
+            };
         }
         public virtual IActionResult GetView()
         {
@@ -80,7 +86,7 @@ namespace CS4125Project.Controllers.EmployeeControllers
             this.requests.openRequests.Remove(request);
         }
 
-        protected int getNextRequestId()
+        public int getNextRequestId()
         {
             return requests.openRequests.Count + requests.closedRequests.Count + 1;
         }

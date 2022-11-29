@@ -5,9 +5,9 @@ namespace CS4125Project.Controllers.EmployeeServices
 {
     public class AssignShiftCommand : Command
     {
-        private EmployeeModel emp;
-        private int shiftID;
-        private RotaController rota;
+        private readonly EmployeeModel emp;
+        private readonly int shiftID;
+        private readonly RotaController rota;
 
         public AssignShiftCommand(EmployeeModel e, int shiftID, RotaController r)
         {

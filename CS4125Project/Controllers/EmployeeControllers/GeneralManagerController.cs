@@ -13,12 +13,6 @@ namespace CS4125Project.Controllers.EmployeeServices
         public GeneralManagerController(EmployeeControllerBase controllerBase, EmployeeModel model) : base(controllerBase, model)
         {
         }
-
-        public int AddEmployee(string name, string email, string role)
-        {
-            int id = 0;
-            return id;
-        }
         public override IActionResult GetView()
         {
             return View();
@@ -27,20 +21,6 @@ namespace CS4125Project.Controllers.EmployeeServices
         public override float AcceptCalc(IPayCalcVisitor visitor)
         {
             return visitor.VisitGeneralManager(this);
-        }
-
-        private bool IsValidEmail(string emailaddress)
-        {
-            try
-            {
-                MailAddress m = new MailAddress(emailaddress);
-
-                return true;
-            }
-            catch (FormatException)
-            {
-                return false;
-            }
         }
 
     }

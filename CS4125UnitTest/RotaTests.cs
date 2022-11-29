@@ -66,5 +66,13 @@ namespace CS4125UnitTest
             var notification = emps!.First().notification;
             Assert.AreNotEqual(notification, "");
         }
+
+        [TestMethod]
+        public void TestAddEmployee()
+        {
+            int count = rota!.GetEmployees().Count();
+            rota!.AddEmployee("boss babe", AuthLevel.GeneralManager, (float)42069.05, "Nicki Minaj", "boo@slay.org");
+            Assert.IsTrue(count + 1 == rota!.GetEmployees().Count());
+        }
     }
 }

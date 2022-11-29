@@ -16,8 +16,8 @@ namespace CS4125Project.Controllers.RotaControllers
     public class RotaController : Controller, ISubject
     {
         private readonly ILogger<RotaController> _logger;
-        private RotaModel rota;
-        private List<IObserver> _observers = new List<IObserver>();
+        private readonly RotaModel rota;
+        private readonly List<IObserver> _observers = new List<IObserver>();
 
         public RotaController(ILogger<RotaController> logger, RotaModel r)
         {
@@ -58,16 +58,18 @@ namespace CS4125Project.Controllers.RotaControllers
 
         public void AddEmployee(string role, AuthLevel level, float basePay, string name, string email)
         {
-            EmployeeModel emp = new EmployeeModel();
-            emp.role = role;
-            emp.sickDays = (float)4;
-            emp.holidays = (float)20;
-            emp.level = level;
-            emp.notification = null;
-            emp.basePay = basePay;
-            emp.SetName(name);
-            emp.SetEmail(email);
-            emp.SetID(rota.employees.Count);
+            EmployeeModel emp = new EmployeeModel {
+            role = role,
+            sickDays = (float)4,
+            holidays = (float)20,
+            level = level,
+            notification = null,
+            basePay = basePay,
+            name = name,
+            email = email,
+            id = rota.employees.Count
+            };
+            rota.employees.Add(emp);
             Notify();
         }
 
