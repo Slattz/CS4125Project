@@ -23,45 +23,47 @@ namespace CS4125Project.Controllers.EmployeeServices
             return visitor.VisitManager(this);
         }
 
-        public void approveRequest(WorkerRequestModel request, bool approve)
+        public void ApproveRequest(WorkerRequestModel request, bool approve)
         {
             request.approved = approve;
             this.requests.closedRequests.Add(request);
             this.requests.closedRequests.Remove(request);
         }
 
-        public void approveShiftSwap(int requestID, bool approve)
+        public void ApproveShiftSwap(int requestID, bool approve)
         {
-            ShiftSwapModel shiftRequest = (ShiftSwapModel)getRequest(requestID);
+            ShiftSwapModel shiftRequest = (ShiftSwapModel)GetRequest(requestID);
             if (shiftRequest.newWorkerAgreed)
             {
                 //change workerID on rota here
             }
-            approveRequest(shiftRequest, shiftRequest.newWorkerAgreed && approve);
+            ApproveRequest(shiftRequest, shiftRequest.newWorkerAgreed && approve);
 
         }
 
-        public void approveSickLeave(int requestID, bool approve)
+        public void ApproveSickLeave(int requestID, bool approve)
         {
-            SickDayRequestModel sickRequest = (SickDayRequestModel)getRequest(requestID);
-            approveRequest(sickRequest, approve);
+            SickDayRequestModel sickRequest = (SickDayRequestModel)GetRequest(requestID);
+            ApproveRequest(sickRequest, approve);
             int newWorkerID = EmployeeSelector.getAvailableEMployee(sickRequest.shiftId).id;
-            ShortNoticeRequest request = new ShortNoticeRequest();
-            request.WorkerID = newWorkerID;
-            request.shiftId = sickRequest.shiftId;
-            request.approved = false;
-            request.requestID = getNextRequestId();
+            ShortNoticeRequest request = new ShortNoticeRequest
+            {
+                WorkerID = newWorkerID,
+                shiftId = sickRequest.shiftId,
+                approved = false,
+                requestID = getNextRequestId()
+            };
             this.requests.openRequests.Add(request);
         }
 
-        public void approveShortNoticeRequest(ShortNoticeRequest request, bool approve)
+        public void ApproveShortNoticeRequest(ShortNoticeRequest request, bool approve)
         {
             request.approved = approve;
             this.requests.closedRequests.Add(request);
             this.requests.openRequests.Remove(request);
         }
 
-        private WorkerRequestModel getRequest(int rID)
+        private WorkerRequestModel GetRequest(int rID)
         {
             foreach (WorkerRequestModel request in this.requests.openRequests)
             {
