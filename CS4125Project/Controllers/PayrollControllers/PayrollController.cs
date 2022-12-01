@@ -1,4 +1,4 @@
-﻿using CS4125Project.Controllers.DatabaseControllers;
+﻿using CS4125Project.Controllers.Database;
 using CS4125Project.Controllers.EmployeeControllers;
 using CS4125Project.Models;
 using CS4125Project.Models.EmployeeModels;
@@ -16,6 +16,12 @@ namespace CS4125Project.Controllers.PayrollControllers
     {
         private readonly ILogger<HomeController> _logger;
         private PayrollModel pmodel;
+
+        public PayrollController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+            pmodel = new PayrollModel();
+        }
 
         public PayrollController(ILogger<HomeController> logger, List<EmployeeControllerBase> emps)
         {
@@ -47,8 +53,8 @@ namespace CS4125Project.Controllers.PayrollControllers
             foreach (EmployeeControllerBase employee in pmodel.employees)
             {
                 employee.employeeModel.notification = "New rota available as of: " + DateTime.Now.ToString();
+                EmployeeDatabase.Instance.UpdateEmployee(employee.employeeModel);
             }
-            DatabaseController.SerializeEmployees(pmodel.employees);
         }
     }
 }

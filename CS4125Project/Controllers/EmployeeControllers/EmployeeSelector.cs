@@ -2,7 +2,7 @@
 using CS4125Project.Models.EmployeeModels;
 using System.Collections.Generic;
 using System;
-using CS4125Project.Controllers.DatabaseControllers;
+using CS4125Project.Controllers.Database;
 
 namespace CS4125Project.Controllers.EmployeeControllers
 {
@@ -20,11 +20,11 @@ namespace CS4125Project.Controllers.EmployeeControllers
             return shiftEmployeeMap;
         }
 
-        public static EmployeeModel getAvailableEMployee(int shiftID)
+        public static EmployeeModel getAvailableEmployee(int shiftID)
         {
             //algorithm for getting available employee here
             var random = new Random();
-            List<EmployeeModel> employees = DatabaseController.GetEmployeesFromSerializable();
+            EmployeeDatabase.Instance.GetAllEmployees(out List<EmployeeModel> employees);
             int index = random.Next(employees.Count);
             return employees[index];
         }
