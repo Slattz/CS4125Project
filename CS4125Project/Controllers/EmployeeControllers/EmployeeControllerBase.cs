@@ -16,7 +16,8 @@ namespace CS4125Project.Controllers.EmployeeControllers
         {
             this.employeeModel = employeeModel;
         }
-        public virtual IActionResult GetView()
+
+        public virtual IActionResult GetView(EmployeeModel employeeModel)
         {
             return View();
         }

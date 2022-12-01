@@ -14,9 +14,9 @@ namespace CS4125Project.Controllers.EmployeeControllers
             this.controllerBase = controllerBase;
         }
 
-        public override IActionResult GetView()
+        public override IActionResult GetView(EmployeeModel employeeModel)
         {
-            return controllerBase.GetView();
+            return controllerBase.GetView(employeeModel);
         }
 
         public override float AcceptCalc(IPayCalcVisitor visitor)

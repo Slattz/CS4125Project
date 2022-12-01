@@ -1,6 +1,9 @@
-﻿using CS4125Project.Models;
+﻿using CS4125Project.Controllers.Database;
+using CS4125Project.Models;
+using CS4125Project.Models.EmployeeModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace CS4125Project.Controllers
@@ -12,12 +15,16 @@ namespace CS4125Project.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+
         }
 
         public IActionResult Index()
         {
-            return View("~/Views/UserViews/Home/Index.cshtml");
+
+            EmployeeDatabase.Instance.GetAllEmployees(out List<EmployeeModel> models);
+            return RedirectToAction("GetView", "Worker", models[0]);
         }
+
 
         public IActionResult Privacy()
         {

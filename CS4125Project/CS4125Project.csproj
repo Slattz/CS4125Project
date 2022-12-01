@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\UserViews\Employee\Rota.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Models\NewFile1.txt" />
   </ItemGroup>
 

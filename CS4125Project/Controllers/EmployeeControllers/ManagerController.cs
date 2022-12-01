@@ -14,7 +14,7 @@ namespace CS4125Project.Controllers.EmployeeServices
 
         }
 
-        public override IActionResult GetView()
+        public override IActionResult GetView(EmployeeModel employeeModel)
         {
             return View();
         }

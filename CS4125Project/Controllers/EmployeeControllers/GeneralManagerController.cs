@@ -12,8 +12,9 @@ namespace CS4125Project.Controllers.EmployeeServices
     {
         public GeneralManagerController(EmployeeControllerBase controllerBase, EmployeeModel model) : base(controllerBase, model)
         {
+
         }
-        public override IActionResult GetView()
+        public override IActionResult GetView(EmployeeModel employeeModel)
         {
             return View();
         }
