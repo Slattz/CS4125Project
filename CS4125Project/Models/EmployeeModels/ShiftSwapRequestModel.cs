@@ -2,7 +2,7 @@
 
 namespace CS4125Project.Models.EmployeeModels
 {
-    public class ShiftSwapModel: WorkerRequestModel
+    public class ShiftSwapRequestModel : WorkerRequestModel
     {
         [Index(4), Name("shiftID")]
         public int shiftID;

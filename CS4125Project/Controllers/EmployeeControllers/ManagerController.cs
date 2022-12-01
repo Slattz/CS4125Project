@@ -24,21 +24,14 @@ namespace CS4125Project.Controllers.EmployeeServices
             return visitor.VisitManager(this);
         }
 
-        public void ApproveRequest(WorkerRequestModel request, bool approve)
-        {
-            this.requests.openRequests.Remove(request);
-            request.approved = approve;
-            this.requests.closedRequests.Add(request);
-        }
-
         public void ApproveShiftSwap(int requestID, bool approve)
         {
-            ShiftSwapModel shiftRequest = (ShiftSwapModel)GetRequest(requestID);
-            if (shiftRequest.newWorkerAgreed)
+            ShiftSwapRequestModel swapRequest = ShiftSwapRequestsDatabase.Instance.GetRequestByID(requestID);
+            if (swapRequest != null)
             {
-                //change workerID on rota here
+                swapRequest.approved = approve;
+                ShiftSwapRequestsDatabase.Instance.UpdateRequest(swapRequest, true);
             }
-            ApproveRequest(shiftRequest, shiftRequest.newWorkerAgreed && approve);
         }
 
         public void GenerateShortNoticeRequest(int newWorkerID, int shiftID)
@@ -77,18 +70,5 @@ namespace CS4125Project.Controllers.EmployeeServices
                 ShortNoticeRequestsDatabase.Instance.UpdateRequest(snRequest, true);
             }
         }
-
-        private WorkerRequestModel GetRequest(int rID)
-        {
-            foreach (WorkerRequestModel request in this.requests.openRequests)
-            {
-                if (request.requestID == rID)
-                { 
-                    return request;
-                }
-            }
-            return null;
-        }
-        
     }
 }

@@ -32,30 +32,27 @@ namespace CS4125Project.Controllers.EmployeeControllers
             return visitor.VisitEmployee(this);
         }
 
-        public void requestShiftSwap(int shiftID, int newEmployeeID)
+        public void RequestShiftSwap(int shiftID, int newEmployeeID)
         {
-            ShiftSwapModel swapRequest = new ShiftSwapModel();
-            swapRequest.approved = false;
-            swapRequest.workerID = this.employeeModel.id;
-            swapRequest.requestID = newEmployeeID;
-            swapRequest.newWorkerAgreed = false;
-            swapRequest.shiftID = shiftID;
-            swapRequest.requestID = getNextRequestId();
-            this.requests.openRequests.Add(swapRequest);
-        }
-        public void agreeShiftSwap(int requestId)
-        {
-            foreach(WorkerRequestModel request in this.requests.openRequests)
+            ShiftSwapRequestModel swapRequest = new ShiftSwapRequestModel
             {
-                if(request.requestID == requestId)
-                {
-                    ShiftSwapModel swapRequest = (ShiftSwapModel)request;
-                    if(swapRequest.newWorkerID == this.employeeModel.GetID())
-                    {
-                        swapRequest.newWorkerAgreed = true;
-                    }
-                    break;
-                }
+                approved = false,
+                workerID = this.employeeModel.id,
+                newWorkerID = newEmployeeID,
+                newWorkerAgreed = false,
+                shiftID = shiftID,
+                requestID = ShiftSwapRequestsDatabase.Instance.GetNextRequestID(),
+            };
+            ShiftSwapRequestsDatabase.Instance.InsertRequest(swapRequest);
+        }
+
+        public void AgreeShiftSwap(int requestID, bool agree)
+        {
+            ShiftSwapRequestModel swapRequest = ShiftSwapRequestsDatabase.Instance.GetRequestByID(requestID);
+            if (swapRequest != null)
+            {
+                swapRequest.newWorkerAgreed = agree;
+                ShiftSwapRequestsDatabase.Instance.UpdateRequest(swapRequest, swapRequest.closed);
             }
         }
 

@@ -34,13 +34,14 @@ namespace CS4125UnitTest
         public void TestShiftSwap()
         {
             SetupScenario();
-            int curId = worker!.getNextRequestId();
-            worker.requestShiftSwap(1, 2);
-            Assert.AreEqual(curId + 1, worker.getNextRequestId());
-            curId = worker.getNextRequestId();
-            worker.agreeShiftSwap(curId - 1);
-            manager!.ApproveShiftSwap(curId - 1, true);
-            Assert.AreEqual(curId, worker.getNextRequestId());
+            int curID = ShiftSwapRequestsDatabase.Instance.GetNextRequestID();
+
+            worker!.RequestShiftSwap(1, 2);
+            Assert.AreEqual(curID + 1, ShiftSwapRequestsDatabase.Instance.GetNextRequestID());
+            curID = ShiftSwapRequestsDatabase.Instance.GetNextRequestID();
+            worker.AgreeShiftSwap(curID - 1, true);
+            manager!.ApproveShiftSwap(curID - 1, true);
+            Assert.AreEqual(curID, ShiftSwapRequestsDatabase.Instance.GetNextRequestID());
         }
 
         [TestMethod]
