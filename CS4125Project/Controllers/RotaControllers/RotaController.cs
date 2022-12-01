@@ -32,6 +32,11 @@ namespace CS4125Project.Controllers.RotaControllers
             rota = r;
         }
 
+        public IActionResult GetView()
+        {
+            return View("~/Views/UserViews/Rota/RotaView.cshtml");
+        }
+
         public IActionResult Index()
         {
             return View();

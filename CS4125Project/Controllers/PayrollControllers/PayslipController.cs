@@ -17,6 +17,12 @@ namespace CS4125Project.Controllers.PayrollControllers
             EmployeeDatabase.Instance.GetAllEmployees(out List<EmployeeModel> employees);
             payroll.employees = EmployeeDatabase.ModelsToEmployee(employees);
         }
+
+        public IActionResult GetView()
+        {
+            return View("~/Views/UserViews/Payslip/PayslipView.cshtml");
+        }
+
         public IActionResult Index()
         {
             return View();

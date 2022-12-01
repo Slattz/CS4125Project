@@ -30,12 +30,12 @@ namespace CS4125Project.Controllers.PayrollControllers
             pmodel.employees = emps;
         }
 
-        public IActionResult Index()
+        public IActionResult GetView()
         {
-            return View();
+            return View("~/Views/UserViews/Payroll/PayrollView.cshtml");
         }
 
-        public IActionResult Privacy()
+        public IActionResult Index()
         {
             return View();
         }
