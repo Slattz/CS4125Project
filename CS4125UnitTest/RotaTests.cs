@@ -35,7 +35,7 @@ namespace CS4125UnitTest
             emps = rota.GetEmployees();
 
             observer = new PayrollController(plogger, EmployeeDatabase.ModelsToEmployee(emps));
-            rota.Attach(rotaObserver);
+            rota.Attach(observer);
         }
 
         [TestMethod]

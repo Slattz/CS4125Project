@@ -25,9 +25,9 @@ namespace CS4125Project.Controllers.EmployeeServices
 
         public void ApproveRequest(WorkerRequestModel request, bool approve)
         {
+            this.requests.openRequests.Remove(request);
             request.approved = approve;
             this.requests.closedRequests.Add(request);
-            this.requests.closedRequests.Remove(request);
         }
 
         public void ApproveShiftSwap(int requestID, bool approve)
@@ -38,7 +38,6 @@ namespace CS4125Project.Controllers.EmployeeServices
                 //change workerID on rota here
             }
             ApproveRequest(shiftRequest, shiftRequest.newWorkerAgreed && approve);
-
         }
 
         public void ApproveSickLeave(int requestID, bool approve)

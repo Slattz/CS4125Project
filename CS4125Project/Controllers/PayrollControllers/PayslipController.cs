@@ -1,4 +1,5 @@
-﻿using CS4125Project.Controllers.DatabaseControllers;
+﻿using CS4125Project.Controllers.Database;
+using CS4125Project.Models.EmployeeModels;
 using CS4125Project.Models.PayrollModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -13,7 +14,8 @@ namespace CS4125Project.Controllers.PayrollControllers
         {
             payroll = new PayrollModel();
             payroll.calc = new IrishPayCalcVisitor();
-            payroll.employees = DatabaseController.ModelToEmployee(DatabaseController.GetEmployeesFromSerializable());
+            EmployeeDatabase.Instance.GetAllEmployees(out List<EmployeeModel> employees);
+            payroll.employees = EmployeeDatabase.ModelsToEmployee(employees);
         }
         public IActionResult Index()
         {

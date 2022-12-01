@@ -81,9 +81,9 @@ namespace CS4125Project.Controllers.EmployeeControllers
 
         public void agreeShortNotice(ShortNoticeRequest request)
         {
+            this.requests.openRequests.Remove(request);
             request.approved = true;
             this.requests.closedRequests.Add(request);
-            this.requests.openRequests.Remove(request);
         }
 
         public int getNextRequestId()

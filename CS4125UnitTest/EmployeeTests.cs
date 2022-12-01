@@ -1,14 +1,6 @@
-using CS4125Project.Controllers;
-using CS4125Project.Controllers.DatabaseControllers;
 using CS4125Project.Controllers.EmployeeControllers;
 using CS4125Project.Controllers.EmployeeServices;
-using CS4125Project.Controllers.PayrollControllers;
-using CS4125Project.Controllers.RotaControllers;
 using CS4125Project.Models.EmployeeModels;
-using CS4125Project.Models.RotaModels;
-using CS4125Project.Observer;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace CS4125UnitTest
 {
