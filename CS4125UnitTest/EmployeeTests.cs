@@ -48,11 +48,12 @@ namespace CS4125UnitTest
         public void TestHoliday()
         {
             SetupScenario();
-            int curId = worker!.getNextRequestId();
-            worker.requestHoliday(DateTime.Now, DateTime.MaxValue);
-            Assert.AreEqual(curId + 1, worker.getNextRequestId());
-            //curId = worker.getNextRequestId();
-            //manager!.ApproveRequest();
+            int curID = HolidayRequestsDatabase.Instance.GetNextRequestID();
+            worker!.RequestHoliday(DateTime.Now, DateTime.MaxValue);
+            Assert.AreEqual(curID + 1, HolidayRequestsDatabase.Instance.GetNextRequestID());
+            curID = HolidayRequestsDatabase.Instance.GetNextRequestID();
+            manager!.ApproveHoliday(curID-1, true);
+            Assert.AreEqual(curID, HolidayRequestsDatabase.Instance.GetNextRequestID());
         }
 
         [TestMethod]
@@ -63,7 +64,7 @@ namespace CS4125UnitTest
             worker!.CallInSick(1);
             Assert.AreEqual(curId + 1, SickRequestsDatabase.Instance.GetNextRequestID());
             curId = SickRequestsDatabase.Instance.GetNextRequestID();
-            manager!.ApproveSickLeave(curId - 1, false); //Employees aren't allowed to be sick
+            manager!.ApproveSickLeave(curId-1, false); //Employees aren't allowed to be sick
             Assert.AreEqual(curId, SickRequestsDatabase.Instance.GetNextRequestID());
         }
 
@@ -75,8 +76,9 @@ namespace CS4125UnitTest
             manager!.GenerateShortNoticeRequest(2, 1);
 
             worker!.AgreeShortNotice(1);
+            curID = ShortNoticeRequestsDatabase.Instance.GetNextRequestID();
             manager!.ApproveShortNoticeRequest(curID, true);
-            Assert.AreEqual(curID + 1, ShortNoticeRequestsDatabase.Instance.GetNextRequestID());
+            Assert.AreEqual(curID, ShortNoticeRequestsDatabase.Instance.GetNextRequestID());
         }
 
         private void SetupScenario()

@@ -34,6 +34,16 @@ namespace CS4125Project.Controllers.EmployeeServices
             }
         }
 
+        public void ApproveHoliday(int requestID, bool approve)
+        {
+            HolidayRequestModel holRequest = HolidayRequestsDatabase.Instance.GetRequestByID(requestID);
+            if (holRequest != null)
+            {
+                holRequest.approved = approve;
+                HolidayRequestsDatabase.Instance.UpdateRequest(holRequest, true);
+            }
+        }
+
         public void GenerateShortNoticeRequest(int newWorkerID, int shiftID)
         {
             ShortNoticeRequestModel request = new ShortNoticeRequestModel

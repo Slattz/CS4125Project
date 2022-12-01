@@ -9,13 +9,13 @@ namespace CS4125Project.Models.EmployeeModels
     {
         [Index(0), Name("name")]
 
-        internal string name { get; set; }
+        public string name { get; set; }
 
         [Index(1), Name("id")]
-        internal int id { get; set; }
+        public int id { get; set; }
 
         [Index(2), Name("email")]
-        internal string email { get; set; }
+        public string email { get; set; }
 
         public string GetEmail()
         {

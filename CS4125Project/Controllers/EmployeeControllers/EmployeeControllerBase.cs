@@ -11,16 +11,10 @@ namespace CS4125Project.Controllers.EmployeeControllers
     public class EmployeeControllerBase : Controller
     {
         internal EmployeeModel employeeModel;
-        protected RequestsModel requests;
 
         public EmployeeControllerBase(EmployeeModel employeeModel)
         {
             this.employeeModel = employeeModel;
-            requests = new RequestsModel()
-            {
-                openRequests = new List<WorkerRequestModel>(),
-                closedRequests = new List<WorkerRequestModel>()
-            };
         }
         public virtual IActionResult GetView()
         {
@@ -56,24 +50,28 @@ namespace CS4125Project.Controllers.EmployeeControllers
             }
         }
 
-        public void requestHoliday(DateTime start, DateTime end)
+        public void RequestHoliday(DateTime start, DateTime end)
         {
-            HolidayRequestModel holRequest = new HolidayRequestModel();
-            holRequest.startDate = start;
-            holRequest.endDate = end;
-            holRequest.approved = false;
-            holRequest.workerID = employeeModel.GetID();
-            holRequest.requestID = getNextRequestId();
-            this.requests.openRequests.Add(holRequest);
+            HolidayRequestModel holRequest = new HolidayRequestModel()
+            {
+                startDate = start,
+                endDate = end,
+                approved = false,
+                workerID = employeeModel.GetID(),
+                requestID = HolidayRequestsDatabase.Instance.GetNextRequestID()
+            };
+            HolidayRequestsDatabase.Instance.InsertRequest(holRequest);
         }
 
         public void CallInSick(int shiftId)
         {
-            SickDayRequestModel sickRequest = new SickDayRequestModel();
-            sickRequest.shiftID = shiftId;
-            sickRequest.workerID = employeeModel.GetID();
-            sickRequest.approved = false;
-            sickRequest.requestID = SickRequestsDatabase.Instance.GetNextRequestID();
+            SickDayRequestModel sickRequest = new SickDayRequestModel()
+            {
+                shiftID = shiftId,
+                workerID = employeeModel.GetID(),
+                approved = false,
+                requestID = SickRequestsDatabase.Instance.GetNextRequestID()
+            };
             SickRequestsDatabase.Instance.InsertRequest(sickRequest);
         }
 
@@ -85,11 +83,6 @@ namespace CS4125Project.Controllers.EmployeeControllers
                 snRequest.approved = true;
                 ShortNoticeRequestsDatabase.Instance.UpdateRequest(snRequest, true);
             }
-        }
-
-        public int getNextRequestId()
-        {
-            return requests.openRequests.Count + requests.closedRequests.Count + 1;
         }
     }
 }

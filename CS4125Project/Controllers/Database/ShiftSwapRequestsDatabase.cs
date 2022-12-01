@@ -23,18 +23,5 @@ namespace CS4125Project.Controllers.Database
                 return instance;
             }
         }
-
-        public ShiftSwapRequestModel GetRequestByShiftID(int shiftID)
-        {
-            db.Deserialize(out List<ShiftSwapRequestModel> models);
-            foreach (var item in models)
-            {
-                if (item.shiftID == shiftID)
-                {
-                    return item;
-                }
-            }
-            return null;
-        }
     }
 }
