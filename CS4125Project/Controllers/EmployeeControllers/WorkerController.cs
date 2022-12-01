@@ -10,16 +10,9 @@ namespace CS4125Project.Controllers.EmployeeServices
 {
     public class WorkerController : EmployeeBaseDecorator
     {
-        /*public WorkerController(EmployeeControllerBase controllerBase, EmployeeModel model) : base(controllerBase, model)
+        public WorkerController(EmployeeControllerBase controllerBase, EmployeeModel model) : base(controllerBase, model)
         {
-            Console.WriteLine("Test 1");
-        }
-*/
-        private readonly ILogger<RotaController> _logger;
 
-        public WorkerController(ILogger<RotaController> logger) : base(null, null)
-        {
-            _logger = logger;
         }
 
         public override IActionResult GetView(EmployeeModel model)
@@ -33,7 +26,6 @@ namespace CS4125Project.Controllers.EmployeeServices
             ViewData["Level"] = model.level;
             ViewData["Notification"] = model.notification;
             ViewData["BasePay"] = model.basePay;
-
 
             return View("~/Views/UserViews/Employee/WorkerView.cshtml");
         }

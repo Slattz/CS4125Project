@@ -10,7 +10,7 @@ namespace CS4125Project.Controllers.EmployeeControllers
             EmployeeControllerBase employeeController = new EmployeeBaseDecorator(new EmployeeControllerBase(model), model);
             if (model.level >= AuthLevel.Worker)
             {
-                //employeeController = new WorkerController(employeeController, model);
+                employeeController = new WorkerController(employeeController, model);
             }
 
             if (model.level >= AuthLevel.Manager)
