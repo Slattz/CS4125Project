@@ -9,6 +9,8 @@ using System.Linq;
 using CS4125Project.Controllers.EmployeeControllers;
 using CsvHelper.Configuration;
 using System;
+using System.Reflection.PortableExecutable;
+using System.Reflection;
 
 namespace CS4125Project.Controllers.Database
 {
@@ -26,8 +28,13 @@ namespace CS4125Project.Controllers.Database
 
         public void Create()
         {
-            FileStream fs = File.Create(path);
-            fs.Close();
+            using (FileStream fs = File.Create(path))
+            using (var writer = new StreamWriter(fs))
+            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+            {
+                csv.WriteHeader<T>();
+                csv.NextRecord();
+            }
         }
 
         public void Delete(T model)

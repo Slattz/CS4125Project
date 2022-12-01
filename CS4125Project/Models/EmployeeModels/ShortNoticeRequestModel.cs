@@ -2,9 +2,10 @@
 
 namespace CS4125Project.Models.EmployeeModels
 {
-    public class SickDayRequestModel : WorkerRequestModel
+    public class ShortNoticeRequestModel : WorkerRequestModel
     {
         [Index(4), Name("shiftID")]
-        public int shiftID { get; set; }
+
+        public int shiftID {get;set;}
     }
 }

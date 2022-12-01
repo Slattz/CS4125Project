@@ -3,6 +3,7 @@ using CS4125Project.Models.EmployeeModels;
 using CS4125Project.Controllers.PayrollControllers;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using CS4125Project.Controllers.Database;
 
 namespace CS4125Project.Controllers.EmployeeServices
 {
@@ -42,20 +43,22 @@ namespace CS4125Project.Controllers.EmployeeServices
 
         public void ApproveSickLeave(int requestID, bool approve)
         {
-            SickDayRequestModel sickRequest = (SickDayRequestModel)GetRequest(requestID);
-            ApproveRequest(sickRequest, approve);
-            int newWorkerID = EmployeeSelector.getAvailableEmployee(sickRequest.shiftId).id;
-            ShortNoticeRequest request = new ShortNoticeRequest
+            SickDayRequestModel sickRequest = SickRequestsDatabase.Instance.GetSickRequestByID(requestID);
+            sickRequest.approved = approve;
+            SickRequestsDatabase.Instance.UpdateRequest(sickRequest, true);
+
+            int newWorkerID = EmployeeSelector.getAvailableEmployee(sickRequest.shiftID).id;
+            ShortNoticeRequestModel request = new ShortNoticeRequestModel
             {
-                WorkerID = newWorkerID,
-                shiftId = sickRequest.shiftId,
+                workerID = newWorkerID,
+                shiftID = sickRequest.shiftID,
                 approved = false,
                 requestID = getNextRequestId()
             };
             this.requests.openRequests.Add(request);
         }
 
-        public void ApproveShortNoticeRequest(ShortNoticeRequest request, bool approve)
+        public void ApproveShortNoticeRequest(ShortNoticeRequestModel request, bool approve)
         {
             request.approved = approve;
             this.requests.closedRequests.Add(request);

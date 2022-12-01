@@ -3,6 +3,7 @@ using CS4125Project.Controllers.PayrollControllers;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using CS4125Project.Controllers.Database;
 
 namespace CS4125Project.Controllers.EmployeeControllers
 {
@@ -35,10 +36,10 @@ namespace CS4125Project.Controllers.EmployeeControllers
         {
             ShiftSwapModel swapRequest = new ShiftSwapModel();
             swapRequest.approved = false;
-            swapRequest.WorkerID = this.employeeModel.id;
+            swapRequest.workerID = this.employeeModel.id;
             swapRequest.requestID = newEmployeeID;
             swapRequest.newWorkerAgreed = false;
-            swapRequest.shiftId = shiftID;
+            swapRequest.shiftID = shiftID;
             swapRequest.requestID = getNextRequestId();
             this.requests.openRequests.Add(swapRequest);
         }
@@ -49,7 +50,7 @@ namespace CS4125Project.Controllers.EmployeeControllers
                 if(request.requestID == requestId)
                 {
                     ShiftSwapModel swapRequest = (ShiftSwapModel)request;
-                    if(swapRequest.newWorkerId == this.employeeModel.GetID())
+                    if(swapRequest.newWorkerID == this.employeeModel.GetID())
                     {
                         swapRequest.newWorkerAgreed = true;
                     }
@@ -64,22 +65,22 @@ namespace CS4125Project.Controllers.EmployeeControllers
             holRequest.startDate = start;
             holRequest.endDate = end;
             holRequest.approved = false;
-            holRequest.WorkerID = employeeModel.GetID();
+            holRequest.workerID = employeeModel.GetID();
             holRequest.requestID = getNextRequestId();
             this.requests.openRequests.Add(holRequest);
         }
 
-        public void callInSick(int shiftId)
+        public void CallInSick(int shiftId)
         {
             SickDayRequestModel sickRequest = new SickDayRequestModel();
-            sickRequest.shiftId = shiftId;
-            sickRequest.WorkerID = employeeModel.GetID();
+            sickRequest.shiftID = shiftId;
+            sickRequest.workerID = employeeModel.GetID();
             sickRequest.approved = false;
-            sickRequest.requestID = getNextRequestId();
-            this.requests.openRequests.Add(sickRequest);
+            sickRequest.requestID = SickRequestsDatabase.Instance.GetNextSickRequestID();
+            SickRequestsDatabase.Instance.InsertRequest(sickRequest);
         }
 
-        public void agreeShortNotice(ShortNoticeRequest request)
+        public void agreeShortNotice(ShortNoticeRequestModel request)
         {
             this.requests.openRequests.Remove(request);
             request.approved = true;
