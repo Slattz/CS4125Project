@@ -1,5 +1,5 @@
 using CS4125Project.Controllers;
-using CS4125Project.Controllers.DatabaseControllers;
+using CS4125Project.Controllers.Database;
 using CS4125Project.Controllers.PayrollControllers;
 using CS4125Project.Controllers.RotaControllers;
 using CS4125Project.Models.EmployeeModels;
@@ -29,10 +29,10 @@ namespace CS4125UnitTest
             rmodel.shifts = new List<ShiftModel> { shift };
 
             ILogger<HomeController> plogger = new Logger<HomeController>(factory);
-            rmodel.employees = DatabaseController.GetEmployeesFromSerializable();
+            EmployeeDatabase.Instance.GetAllEmployees(out rmodel.employees);
             rota = new RotaController(logger, rmodel);
             emps = rota.GetEmployees();
-            PayrollController rotaObserver = new PayrollController(plogger, DatabaseController.ModelToEmployee(emps));
+            PayrollController rotaObserver = new PayrollController(plogger, EmployeeDatabase.ModelsToEmployee(emps));
             rota.Attach(rotaObserver);
         }
 
@@ -40,8 +40,6 @@ namespace CS4125UnitTest
         public void TestRotaViews()
         {
             var res = rota!.Index();
-            Assert.IsInstanceOfType(res, typeof(ViewResult));
-            res = rota.Privacy();
             Assert.IsInstanceOfType(res, typeof(ViewResult));
         }
 

@@ -1,15 +1,19 @@
-﻿using System.Diagnostics.Contracts;
+﻿using CsvHelper.Configuration.Attributes;
+using System.Diagnostics.Contracts;
 
 namespace CS4125Project.Models.EmployeeModels
 {
     public class UserModel
     {
+        [Index(0), Name("name")]
 
-        internal string name;
+        internal string name { get; set; }
 
-        internal int id;
+        [Index(1), Name("id")]
+        internal int id { get; set; }
 
-        internal string email;
+        [Index(2), Name("email")]
+        internal string email { get; set; }
 
         public string GetEmail()
         {

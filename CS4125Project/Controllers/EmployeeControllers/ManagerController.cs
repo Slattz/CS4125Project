@@ -45,7 +45,7 @@ namespace CS4125Project.Controllers.EmployeeServices
         {
             SickDayRequestModel sickRequest = (SickDayRequestModel)GetRequest(requestID);
             ApproveRequest(sickRequest, approve);
-            int newWorkerID = EmployeeSelector.getAvailableEMployee(sickRequest.shiftId).id;
+            int newWorkerID = EmployeeSelector.getAvailableEmployee(sickRequest.shiftId).id;
             ShortNoticeRequest request = new ShortNoticeRequest
             {
                 WorkerID = newWorkerID,

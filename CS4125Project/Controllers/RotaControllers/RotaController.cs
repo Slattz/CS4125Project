@@ -19,6 +19,13 @@ namespace CS4125Project.Controllers.RotaControllers
         private RotaModel rota;
         private List<IObserver> _observers = new List<IObserver>();
 
+        public RotaController(ILogger<RotaController> logger)
+        {
+            _logger = logger;
+            rota = new RotaModel();
+        }
+
+        //Needed for Tests, not used in practice
         public RotaController(ILogger<RotaController> logger, RotaModel r)
         {
             _logger = logger;
@@ -28,17 +35,6 @@ namespace CS4125Project.Controllers.RotaControllers
         public IActionResult Index()
         {
             return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         [HttpPost]
@@ -76,12 +72,6 @@ namespace CS4125Project.Controllers.RotaControllers
             return rota.employees;
         }
 
-        /*[HttpPost]
-        public DateTime AddShift(string role, Day workday, DateTime startTime, DateTime endTime)
-        {
-            
-        }*/
-
         [HttpPost]
         public void RemoveShift(int shiftID)
         {
@@ -118,12 +108,6 @@ namespace CS4125Project.Controllers.RotaControllers
         {
             return rota.shifts;
         }
-
-        [HttpPost]
-        /*public <ShiftModel> GetRota()
-        {
-
-        }*/
 
         public void Attach(IObserver observer)
         {
