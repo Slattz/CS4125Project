@@ -2,7 +2,48 @@
     ViewData["Title"] = "Employee View";
 }
 
+<style>
+    .borderNew{
+        background-color: aliceblue;
+        border: 2px solid blue;
+    }
+</style>
+
 <div class="text-center">
-    <h1 class="display-4">Hey @ViewData["ID"]</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="borderNew" style="">
+        <h1 style="color:blue" class="display-4">👷‍♂️ Employee Page: 👷‍♀️ </h1>
+        <h1 class="display-4"> <b>Name: @ViewData["Name"] </b></h1>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="borderNew" style="">
+        <h3 class="display-5">ID: @ViewData["ID"] </h3>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="borderNew" style="">
+        <h3 class="display-5">Email: @ViewData["Email"] </h3>
+        <h3 class="display-6">Role: @ViewData["Role"] </h3>
+        <h3 class="display-6">📊 Level: @ViewData["Level"] </h3>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="borderNew" style="">
+        <h3 class="display-6">🤒 Remaining Sick Days: @ViewData["SickDays"] ✔️</h3>
+        <h3 class="display-6">🏖 Remaining Holidays: @ViewData["Holidays"] ✔️ </h3>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="borderNew" style="">
+        <h3 class="display-6">⚠️ Notifications: @ViewData["Notification"] </h3>
+        <h3 class="display-6">💰 Base-pay: €@ViewData["BasePay"] </h3>
+    </div>
 </div>

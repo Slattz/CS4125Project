@@ -1,4 +1,4 @@
 name,id,email,role,sickDays,holidays,level,notification,basePay
-Josh McGiff,11111111,joshisiconic@gmail.com,Software Developer,10,10,Worker,,1000
-James Joyce,11111112,james@gmail.com,Software Developer,10,10,Worker,,1050
-Jack Frost,11111113,jack@gmail.com,Software Developer,10,10,Worker,,1100
+Josh McGiff,11111111,joshisiconic@gmail.com,Software Developer,10,10,Worker,You're fired!,1000
+James Joyce,11111112,james@gmail.com,Software Developer,10,10,Worker,A new rota is available!,1050
+Jack Frost,11111113,jack@gmail.com,Software Developer,10,10,Worker,A new rota is available!,1100
