@@ -58,23 +58,24 @@ namespace CS4125UnitTest
         public void TestSick()
         {
             SetupScenario();
-            int curId = SickRequestsDatabase.Instance.GetNextSickRequestID();
+            int curId = SickRequestsDatabase.Instance.GetNextRequestID();
             worker!.CallInSick(1);
-            Assert.AreEqual(curId + 1, SickRequestsDatabase.Instance.GetNextSickRequestID());
-            curId = SickRequestsDatabase.Instance.GetNextSickRequestID();
+            Assert.AreEqual(curId + 1, SickRequestsDatabase.Instance.GetNextRequestID());
+            curId = SickRequestsDatabase.Instance.GetNextRequestID();
             manager!.ApproveSickLeave(curId - 1, false); //Employees aren't allowed to be sick
-            Assert.AreEqual(curId, SickRequestsDatabase.Instance.GetNextSickRequestID());
+            Assert.AreEqual(curId, SickRequestsDatabase.Instance.GetNextRequestID());
         }
 
         [TestMethod]
         public void TestShortNotice()
         {
             SetupScenario();
-            int curId = worker!.getNextRequestId();
-            ShortNoticeRequestModel req = new ShortNoticeRequestModel { shiftID = 1 };
-            manager!.ApproveShortNoticeRequest(req, true);
-            worker!.agreeShortNotice(req);
-            Assert.AreEqual(curId + 1, worker.getNextRequestId());
+            int curID = ShortNoticeRequestsDatabase.Instance.GetNextRequestID();
+            manager!.GenerateShortNoticeRequest(2, 1);
+
+            worker!.AgreeShortNotice(1);
+            manager!.ApproveShortNoticeRequest(curID, true);
+            Assert.AreEqual(curID + 1, ShortNoticeRequestsDatabase.Instance.GetNextRequestID());
         }
 
         private void SetupScenario()

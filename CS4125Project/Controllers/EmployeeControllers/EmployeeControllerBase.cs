@@ -76,15 +76,18 @@ namespace CS4125Project.Controllers.EmployeeControllers
             sickRequest.shiftID = shiftId;
             sickRequest.workerID = employeeModel.GetID();
             sickRequest.approved = false;
-            sickRequest.requestID = SickRequestsDatabase.Instance.GetNextSickRequestID();
+            sickRequest.requestID = SickRequestsDatabase.Instance.GetNextRequestID();
             SickRequestsDatabase.Instance.InsertRequest(sickRequest);
         }
 
-        public void agreeShortNotice(ShortNoticeRequestModel request)
+        public void AgreeShortNotice(int shiftID)
         {
-            this.requests.openRequests.Remove(request);
-            request.approved = true;
-            this.requests.closedRequests.Add(request);
+            ShortNoticeRequestModel snRequest = ShortNoticeRequestsDatabase.Instance.GetRequestByShiftID(shiftID);
+            if (snRequest != null )
+            {
+                snRequest.approved = true;
+                ShortNoticeRequestsDatabase.Instance.UpdateRequest(snRequest, true);
+            }
         }
 
         public int getNextRequestId()

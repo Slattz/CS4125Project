@@ -41,28 +41,41 @@ namespace CS4125Project.Controllers.EmployeeServices
             ApproveRequest(shiftRequest, shiftRequest.newWorkerAgreed && approve);
         }
 
-        public void ApproveSickLeave(int requestID, bool approve)
+        public void GenerateShortNoticeRequest(int newWorkerID, int shiftID)
         {
-            SickDayRequestModel sickRequest = SickRequestsDatabase.Instance.GetSickRequestByID(requestID);
-            sickRequest.approved = approve;
-            SickRequestsDatabase.Instance.UpdateRequest(sickRequest, true);
-
-            int newWorkerID = EmployeeSelector.getAvailableEmployee(sickRequest.shiftID).id;
             ShortNoticeRequestModel request = new ShortNoticeRequestModel
             {
                 workerID = newWorkerID,
-                shiftID = sickRequest.shiftID,
+                shiftID = shiftID,
                 approved = false,
-                requestID = getNextRequestId()
+                closed = false,
+                requestID = ShortNoticeRequestsDatabase.Instance.GetNextRequestID()
             };
-            this.requests.openRequests.Add(request);
+            ShortNoticeRequestsDatabase.Instance.InsertRequest(request);
         }
 
-        public void ApproveShortNoticeRequest(ShortNoticeRequestModel request, bool approve)
+        public void ApproveSickLeave(int requestID, bool approve)
         {
-            request.approved = approve;
-            this.requests.closedRequests.Add(request);
-            this.requests.openRequests.Remove(request);
+            SickDayRequestModel sickRequest = SickRequestsDatabase.Instance.GetRequestByID(requestID);
+
+            if (sickRequest != null)
+            {
+                sickRequest.approved = approve;
+                SickRequestsDatabase.Instance.UpdateRequest(sickRequest, true);
+                int newWorkerID = EmployeeSelector.getAvailableEmployee(sickRequest.shiftID).id;
+
+                GenerateShortNoticeRequest(newWorkerID, sickRequest.shiftID);
+            }
+        }
+
+        public void ApproveShortNoticeRequest(int requestID, bool approve)
+        {
+            ShortNoticeRequestModel snRequest = ShortNoticeRequestsDatabase.Instance.GetRequestByID(requestID);
+            if (snRequest != null) 
+            {
+                snRequest.approved = approve;
+                ShortNoticeRequestsDatabase.Instance.UpdateRequest(snRequest, true);
+            }
         }
 
         private WorkerRequestModel GetRequest(int rID)
