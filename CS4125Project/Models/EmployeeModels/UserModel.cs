@@ -1,5 +1,7 @@
-﻿using CsvHelper.Configuration.Attributes;
+using CsvHelper.Configuration.Attributes;
+using System;
 using System.Diagnostics.Contracts;
+using System.Net.Mail;
 
 namespace CS4125Project.Models.EmployeeModels
 {
@@ -22,7 +24,7 @@ namespace CS4125Project.Models.EmployeeModels
 
         public void SetEmail(string value)
         {
-            Contract.Requires(value.Contains("@") && value.Contains("."));
+            Contract.Requires(IsValidEmail(value));
             email = value;
         }
 
@@ -48,6 +50,18 @@ namespace CS4125Project.Models.EmployeeModels
             id = value;
         }
 
+        private bool IsValidEmail(string emailaddress)
+        {
+            try
+            {
+                MailAddress m = new MailAddress(emailaddress);
 
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
     }
 }

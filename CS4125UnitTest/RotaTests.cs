@@ -16,6 +16,7 @@ namespace CS4125UnitTest
         private RotaController? rota;
         private List<EmployeeModel>? emps;
         private ShiftModel? shift;
+        private PayrollController? observer;
 
 
         [TestInitialize]
@@ -32,7 +33,8 @@ namespace CS4125UnitTest
             EmployeeDatabase.Instance.GetAllEmployees(out rmodel.employees);
             rota = new RotaController(logger, rmodel);
             emps = rota.GetEmployees();
-            PayrollController rotaObserver = new PayrollController(plogger, EmployeeDatabase.ModelsToEmployee(emps));
+
+            observer = new PayrollController(plogger, EmployeeDatabase.ModelsToEmployee(emps));
             rota.Attach(rotaObserver);
         }
 
@@ -63,6 +65,24 @@ namespace CS4125UnitTest
             rota!.assignWeeksShifts();
             var notification = emps!.First().notification;
             Assert.AreNotEqual(notification, "");
+        }
+
+        [TestMethod]
+        public void TestAddEmployee()
+        {
+            int count = rota!.GetEmployees().Count();
+            rota!.AddEmployee("boss babe", AuthLevel.GeneralManager, (float)42069.05, "Nicki Minaj", "boo@slay.org");
+            Assert.IsTrue(count + 1 == rota!.GetEmployees().Count());
+        }
+
+        [TestMethod]
+        public void TestAddShift()
+        {
+            var notification = emps!.First().notification;
+            rota!.Detach(observer);
+            rota.AddShift(new ShiftModel());
+            rota!.UpdateCurrentRota();
+            Assert.AreEqual(notification, emps!.First().notification);
         }
     }
 }
