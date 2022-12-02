@@ -13,6 +13,7 @@ using System.Linq;
 
 namespace CS4125Project.Controllers.RotaControllers
 {
+    // Concrete subject class
     public class RotaController : Controller, ISubject
     {
         private readonly ILogger<RotaController> _logger;
