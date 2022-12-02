@@ -12,6 +12,7 @@ using System.Diagnostics;
 
 namespace CS4125Project.Controllers.PayrollControllers
 {
+    //Concrete observer
     public class PayrollController : Controller, IObserver
     {
         private readonly ILogger<HomeController> _logger;

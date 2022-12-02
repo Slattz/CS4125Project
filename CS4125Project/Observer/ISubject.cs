@@ -1,6 +1,6 @@
 ﻿namespace CS4125Project.Observer
 {
-
+    // The abstract subject class
     public interface ISubject
     {
         // Attach an observer to the subject.
