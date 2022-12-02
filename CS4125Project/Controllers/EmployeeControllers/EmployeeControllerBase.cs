@@ -27,6 +27,7 @@ namespace CS4125Project.Controllers.EmployeeControllers
             return visitor.VisitEmployee(this);
         }
 
+        [HttpPost]
         public void RequestShiftSwap(int shiftID, int newEmployeeID)
         {
             ShiftSwapRequestModel swapRequest = new ShiftSwapRequestModel
@@ -41,6 +42,7 @@ namespace CS4125Project.Controllers.EmployeeControllers
             ShiftSwapRequestsDatabase.Instance.InsertRequest(swapRequest);
         }
 
+        [HttpPost]
         public void AgreeShiftSwap(int requestID, bool agree)
         {
             ShiftSwapRequestModel swapRequest = ShiftSwapRequestsDatabase.Instance.GetRequestByID(requestID);
@@ -51,6 +53,7 @@ namespace CS4125Project.Controllers.EmployeeControllers
             }
         }
 
+        [HttpPost]
         public void RequestHoliday(DateTime start, DateTime end)
         {
             HolidayRequestModel holRequest = new HolidayRequestModel()
@@ -64,6 +67,7 @@ namespace CS4125Project.Controllers.EmployeeControllers
             HolidayRequestsDatabase.Instance.InsertRequest(holRequest);
         }
 
+        [HttpPost]
         public void CallInSick(int shiftId)
         {
             SickDayRequestModel sickRequest = new SickDayRequestModel()
@@ -76,6 +80,7 @@ namespace CS4125Project.Controllers.EmployeeControllers
             SickRequestsDatabase.Instance.InsertRequest(sickRequest);
         }
 
+        [HttpPost]
         public void AgreeShortNotice(int shiftID)
         {
             ShortNoticeRequestModel snRequest = ShortNoticeRequestsDatabase.Instance.GetRequestByShiftID(shiftID);

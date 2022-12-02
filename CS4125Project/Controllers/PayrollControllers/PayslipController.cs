@@ -28,6 +28,7 @@ namespace CS4125Project.Controllers.PayrollControllers
             return View();
         }
 
+        [HttpGet]
         public void GeneratePayslip()
         {
             payroll.payslips = new List<PayslipModel>();
