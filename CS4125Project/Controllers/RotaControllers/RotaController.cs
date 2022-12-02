@@ -34,7 +34,7 @@ namespace CS4125Project.Controllers.RotaControllers
 
         public IActionResult GetView()
         {
-            return View("~/Views/UserViews/Rota/RotaView.cshtml");
+            return View("~/Views/RotaViews/Rota/RotaView.cshtml");
         }
 
         public IActionResult Index()

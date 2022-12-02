@@ -20,7 +20,7 @@ namespace CS4125Project.Controllers.PayrollControllers
 
         public IActionResult GetView()
         {
-            return View("~/Views/UserViews/Payslip/PayslipView.cshtml");
+            return View("~/Views/PayrollViews/Payslip/PayslipView.cshtml");
         }
 
         public IActionResult Index()

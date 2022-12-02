@@ -32,7 +32,7 @@ namespace CS4125Project.Controllers.PayrollControllers
 
         public IActionResult GetView()
         {
-            return View("~/Views/UserViews/Payroll/PayrollView.cshtml");
+            return View("~/Views/PayrollViews/Payroll/PayrollView.cshtml");
         }
 
         public IActionResult Index()

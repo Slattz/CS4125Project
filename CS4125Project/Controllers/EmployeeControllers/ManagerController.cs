@@ -16,7 +16,7 @@ namespace CS4125Project.Controllers.EmployeeServices
 
         public override IActionResult GetView(EmployeeModel employeeModel)
         {
-            return View("~/Views/UserViews/Manager/ManagerView.cshtml");
+            return View("~/Views/AdminViews/Manager/ManagerView.cshtml");
         }
 
         public override float AcceptCalc(IPayCalcVisitor visitor)
